@@ -1,30 +1,38 @@
 <template>
   <div id="app">
-    <!--<img alt="Vue logo" src="./assets/logo.png">-->
-    <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-      <a class="navbar-brand" href="#">MADERA</a>
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
-              <form class="form-inline my-2 my-lg-0">
-                  <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              </form>
-          </div>
-    </nav>
-
-  <div class="row">
-      <div class="col-2">
-        <div class="nav flex-column nav-pills">
-          <div class="nav-item dropdown">
-             <router-link to="/" class="nav-link dropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Accueil</router-link>
-            <router-link to="/clients" class="nav-link dropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Consulter les clients</router-link>
-             <router-link to="/devisshow" class="nav-link dropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Consulter les devis</router-link>
-              <router-link to="/devisedit" class="nav-link dropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Créer un devis</router-link>
-          </div>
-        </div>
+    <!--Navbar-->
+    <nav class="navbar navbar-light navbar-dark bg-primary">
+      <!-- Navbar brand -->
+      <a class="navbar-toggler btn-outline-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent15"
+        aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation" ><span class="navbar-toggler-icon"></span></a>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+            </nav>
+      <!-- Collapsible content -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent15">
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto bg-primary col-2">
+          <li class="nav-item active">   	
+          </li>
+          <li class="nav-item">
+            <router-link to="/clients" class="nav-link dropdown float-left ml-3" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Consulter les clients</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/devisshow" class="nav-link dropdown float-left ml-3" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Consulter les devis</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/devisedit" class="nav-link dropdown float-left ml-3" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Créer un devis</router-link>
+          </li>
+        </ul>
+        <!-- Links -->
       </div>
-  </div>
+      <!-- Collapsible content -->
+    <!--/.Navbar-->
     <router-view/>
   </div>
+
 </template>
 
 <script>
@@ -43,4 +51,5 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
 </style>
