@@ -1,20 +1,28 @@
 <template>
   <div id="app">
     <!--<img alt="Vue logo" src="./assets/logo.png">-->
-     <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-     <a class="navbar-brand" href="#">MADERA</a>
-      <button class="btn btn-outline-dark btn-lg float-right" type="submit">Compte</button>
- </nav>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">MADERA</a>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+              <form class="form-inline my-2 my-lg-0">
+                  <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+          </div>
+    </nav>
 
-     <div id="nav">
-      <router-link to="/">Accueil</router-link>
-       | 
-      <router-link to="/clients">Clients</router-link>
-       | 
-      <router-link to="/devisshow">DevisShow</router-link>
-       | 
-      <router-link to="/devisedit">DevisEdit</router-link>
-    </div>
+  <div class="row">
+      <div class="col-2">
+        <div class="nav flex-column nav-pills">
+          <div class="nav-item dropdown">
+             <router-link to="/" class="nav-link dropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Accueil</router-link>
+            <router-link to="/clients" class="nav-link dropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Consulter les clients</router-link>
+             <router-link to="/devisshow" class="nav-link dropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Consulter les devis</router-link>
+              <router-link to="/devisedit" class="nav-link dropdown" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Créer un devis</router-link>
+          </div>
+        </div>
+      </div>
+  </div>
     <router-view/>
   </div>
 </template>
@@ -34,6 +42,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
