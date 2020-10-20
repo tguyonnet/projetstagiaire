@@ -1,20 +1,20 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <Menu/>
-    <Clients/>
+     <div id="nav">
+      <router-link to="/">Accueil</router-link>
+       | 
+      <router-link to="/clients">Clients</router-link>
+    </div>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import Clients from './components/Clients.vue'
-import Menu from './components/Menu.vue'
 
 export default {
   name: 'App',
   components: {
-    Menu,
-    Clients
   }
 }
 </script>
