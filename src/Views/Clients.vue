@@ -2,9 +2,10 @@
   <div class="about">
     <h1>Clients</h1>
     {{ test() }}
+
+    
   </div>
 </template>
-
 
 <script>
 export default {
@@ -12,12 +13,7 @@ export default {
   methods: {
     test: function() {
       console.log(this.$db)
-      console.log('test')
     }
-  },
-  computed: {
-
-
   }
 }
 </script>

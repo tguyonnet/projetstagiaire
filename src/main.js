@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router.js'
 import PouchDB from 'pouchdb'
+import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false
 
@@ -10,8 +11,6 @@ Vue.prototype.$db = db
 
 new Vue({
   router,
-  render: h => h(App),
-  data: {
-    // db: db,
-  }
+  vuetify,
+  render: h => h(App)
 }).$mount('#app')
