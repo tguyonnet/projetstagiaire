@@ -16,15 +16,15 @@
                 <th class="text-center"> Actions </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody v-if="customers.length > 0">
               <tr v-for="customer in customers" :key="customer.name">
-                <td>{{ customer.name }}</td>
-                <td>{{ customer.firstName }}</td>
-                <td>{{ customer.address }}</td>
-                <td>{{ customer.postCode }}</td>
-                <td>{{ customer.city }}</td>
-                <td>{{ customer.email }}</td>
-                <td>{{ customer.phone }}</td>
+                <td>{{ customer.doc.name }}</td>
+                <td>{{ customer.doc.firstName }}</td>
+                <td>{{ customer.doc.address }}</td>
+                <td>{{ customer.doc.postCode }}</td>
+                <td>{{ customer.doc.city }}</td>
+                <td>{{ customer.doc.email }}</td>
+                <td>{{ customer.doc.phone }}</td>
                 <td>         
                   <button type="button" class="btn btn-primary">Modifier</button>
                   <button type="button" class="btn btn-secondary">Créer devis</button>
@@ -41,14 +41,41 @@
 <script>
 export default {
   name: 'Clients',
-  methods: {
-    test: function() {
-      console.log(this.$db)
+  data() {
+    //toutes les variables qu'on utilise dans le template
+    return {  
+      customers: [],
     }
   },
-  data () {
-    return {
-      customers: []
+  //la méthode created() s'appelle toute seule quand on ouvre la page
+  created() {
+    let vm = this
+    vm.$db.allDocs({
+      include_docs: true,
+      starkey: 'client_',
+      endkey: 'client_\uFFFF'
+    }).then(function(docs) {
+      // console.log(docs.rows)
+      vm.customers = docs.rows
+    });
+  },
+  methods: {
+    addCustomer: function addCust(data) {
+      var customer = {
+        _id: "C_" + data.name + data.codePostal,
+        nom: data.name,
+        firstName: data.firstName,
+        address: data.address,
+        postCode: data.postCode,
+        city: data.city,
+        email: data.email,
+        phone: data.phone
+      };
+      this.$db.put(customer, function callback(err) {
+        if (!err) {
+          console.log('Successfully posted customer!');
+        }
+      });
     }
   }
 }
