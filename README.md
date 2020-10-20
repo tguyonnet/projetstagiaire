@@ -1,3 +1,0 @@
-# projetstagiaire-front
-
-<!-- klfdjsdlkjskl>
