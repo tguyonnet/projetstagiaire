@@ -12,8 +12,7 @@
                                 <li>
                    <router-link to="/" class="nav-link dropdown " data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Accueil</router-link>
                 </li>   
-                <li class="active">
-                  
+                <li>
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Edition Devis</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
@@ -29,9 +28,8 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-            <router-link to="/clients" class="nav-link dropdown " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Consulter les clients</router-link>
-
+                <li class="active">
+                  <router-link to="/clients" class="nav-link dropdown active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Consulter les clients</router-link>
                 </li>          
             </ul>
         </nav>

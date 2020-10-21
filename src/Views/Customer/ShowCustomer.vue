@@ -30,7 +30,8 @@
                 <td>{{ customer.doc.email }}</td>
                 <td>{{ customer.doc.phone }}</td>
                 <td>         
-                  <button type="button" class="btn btn-primary">Modifier</button>
+                  <router-link class="btn btn-primary" to="/client/edit">Modifier</router-link>
+                  <!-- <button type="button" class="btn btn-primary">Modifier</button> -->
                   <button type="button" class="btn btn-secondary">Créer devis</button>
                 </td>
               </tr>
@@ -43,6 +44,8 @@
 
 
 <script>
+// import FormCustomer from '../../components/FormCustomer'
+
 export default {
   name: 'ShowCustomer',
   data() {
@@ -60,9 +63,12 @@ export default {
       starkey: 'client_',
       endkey: 'client_\uFFFF'
     }).then(function(docs) {
-      // console.log(docs.rows)
+      console.log(docs.rows)
       vm.customers = docs.rows
     });
+  },
+  components: {
+    // FormCustomer
   },
 }
 </script>
