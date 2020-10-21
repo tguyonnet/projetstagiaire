@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    {{valueSearch}}
     <h1>Clients 
       <button>
           <router-link to="/clients/add" class="fa fa-plus" aria-haspopup="true"></router-link>
@@ -81,8 +80,8 @@ export default {
   },
   methods:{
     search:function(){
-      console.log(this.customers)
-      this.customersFilter = this.customers.filter(c => c['id'].includes(this.valueSearch))
+     // console.log(this.customers)
+      this.customersFilter = this.customers.filter(c => c['name'].includes(this.valueSearch))
     }
   }
 }
