@@ -1,13 +1,19 @@
 <template>
   <div class="container">
+    {{valueSearch}}
     <h1>Clients 
       <button>
           <router-link to="/clients/add" class="fa fa-plus" aria-haspopup="true"></router-link>
 
       </button>
     </h1>
+    <form class="form-inline my-2 my-lg-0">
+      <input v-model="valueSearch" class="form-control mr-sm-2" type="text" placeholder="Search">{{valueSearch}}
+      <button @click="search()" class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+    </form>
     <v-app id="inspire">
         <v-simple-table>
+          
           <template v-slot:default>
             <thead>
               <tr>
@@ -22,7 +28,7 @@
               </tr>
             </thead>
             <tbody v-if="customers.length > 0">
-              <tr v-for="customer in customers" :key="customer">
+              <tr v-for="customer in customersFilter" :key="customer.name">
                 <td>{{ customer.doc.name }}</td>
                 <td>{{ customer.doc.firstName }}</td>
                 <td>{{ customer.doc.address }}</td>
@@ -53,23 +59,32 @@ export default {
     //toutes les variables qu'on utilise dans le template
     return {  
       customers: [],
+      customersFilter:[],
+      valueSearch:'',
     }
   },
   //la méthode created() s'appelle toute seule quand on ouvre la page
   created() {
     let vm = this
     // permet de recupérer tous les documents "client"
+ 
     vm.$db.allDocs({
       include_docs: true,
       starkey: 'client_',
       endkey: 'client_\uFFFF'
     }).then(function(docs) {
-      console.log(docs.rows)
+       //console.log(docs.rows)
       vm.customers = docs.rows
+      vm.customersFilter = vm.customers 
     });
+    //this.search()
   },
-  components: {
-    // FormCustomer
-  },
+  methods:{
+    search:function(){
+      console.log(this.customers)
+      this.customersFilter = this.customers.filter(c => c['id'].includes(this.valueSearch))
+    }
+  }
 }
+
 </script>
