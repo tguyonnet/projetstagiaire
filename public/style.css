@@ -125,7 +125,7 @@ ul ul a {
 
 #content {
     width: 100%;
-    padding: 20px;
+    padding-top: 20px;
     min-height: 100vh;
     transition: all 0.3s;
 }
@@ -147,6 +147,11 @@ ul ul a {
 }
 
 #footfoot {
-    background-color: #6d7fcc;
+    background-color: #7386D5;
     font-weight: bold;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    left: 0;
+
 }

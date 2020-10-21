@@ -39,9 +39,6 @@
                 <button type="button" id="sidebarCollapse" class="btn btn-info">
                   <i class="fas fa-align-left"></i>
                 </button>
-                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <i class="fas fa-align-justify"></i>
-                </button>
                 <form class="form-inline my-2 my-lg-0">
                   <input class="form-control mr-sm-2" type="text" placeholder="Entrer une recherche">
                   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
@@ -49,14 +46,13 @@
               </div>
             </nav> 
             <router-view/> <!-- Affichage des views appelées-->
+            <footer class="page-footer font-small">
+              <div class="footer-copyright text-center py-3" id=footfoot>© 2020 Copyright: CESI Groupe 3 PFR
+              </div>
+            </footer>
         </div>  
       </div>
 
-      <footer class="page-footer font-small">
-        <div class="footer-copyright text-center py-3" id=footfoot>© 2020 Copyright:
-          <a href="#">CESI Groupe 3 PFR</a>
-        </div>
-      </footer>
     </div>
 
 </template>
