@@ -2,11 +2,6 @@
   <div class="container">
     <h1>{{ title }}</h1>
     <v-app id="inspire">
-      <!-- <div v-if="errors.lenght > 0" class="alert alert-danger" role="alert">
-        <div v-for="error in errors" :key="error">
-          <strong>{{ error }}</strong>
-        </div>
-      </div> -->
       <v-form v-model="valid">
         <v-container>
           <v-row>
@@ -52,7 +47,6 @@ export default {
       shortid: this.$shortid,
       // les donées du form
       valid: true,
-      errors: [],
       dataForm: {
         key: '',
         name: '',
@@ -70,10 +64,10 @@ export default {
     fieldRules(field) {
       let rules = []
       rules.push(v => !!v || 'Le champ ' + field + ' est obligatoire')
-      if (field == 'Code postal') {
-        rules.push(v => (v && v.length >= 5))
+      if (field == 'code postal') {
+        rules.push(v => (v && v.length <= 5))
       }
-      if (field == 'E-mail') {
+      if (field == 'e-mail') {
         rules.push(v => /.+@.+\..+/.test(v) || "L' e-mail n'est pas valide")
       }
       return rules
@@ -87,6 +81,7 @@ export default {
     // on ajoute le client
     addCustomer(data) {
       // console.log(data)
+      let vm = this
       data.key = this.shortid.generate()
       var customer = {
         _id: "client_" + data.name + "_" + data.postCode + "_" + data.key,
@@ -99,13 +94,14 @@ export default {
         email: data.email,
         phone: data.phone
       };
-      // on envoiée le client en BDD
-      this.$db.put(customer, function callback(err) {
+      // on envoie le client en BDD
+      vm.$db.put(customer, function callback(err) {
         if (!err) {
           console.log('Customer added!');
-        }
-        else {
-          this.errors.push(err)
+          console.log(vm.dataForm)
+          console.log(vm.valid)
+          vm.dataForm = []
+          vm.valid = !vm.valid
         }
       });
     }

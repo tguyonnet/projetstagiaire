@@ -3,8 +3,7 @@
     {{valueSearch}}
     <h1>Clients 
       <button>
-          <router-link to="/clients/add" class="fa fa-plus" aria-haspopup="true"></router-link>
-
+          <router-link to="/client/add" class="fa fa-plus" aria-haspopup="true"></router-link>
       </button>
     </h1>
     <form class="form-inline my-2 my-lg-0">
@@ -13,7 +12,6 @@
     </form>
     <v-app id="inspire">
         <v-simple-table>
-          
           <template v-slot:default>
             <thead>
               <tr>
@@ -37,8 +35,7 @@
                 <td>{{ customer.doc.email }}</td>
                 <td>{{ customer.doc.phone }}</td>
                 <td>         
-                  <router-link class="btn btn-primary" style="color: #fff!important" to="/client/edit">Modifier</router-link>
-                  <!-- <button type="button" class="btn btn-primary">Modifier</button> -->
+                  <router-link class="btn btn-primary" style="color: #fff!important" :to="{path:'/client/edit', params:{customer: customer.doc._id}}">Modifier</router-link>
                   <button type="button" class="btn btn-secondary">Créer devis</button>
                 </td>
               </tr>
@@ -49,14 +46,11 @@
   </div>
 </template>
 
-
 <script>
-// import FormCustomer from '../../components/FormCustomer'
-
 export default {
   name: 'ShowCustomer',
+  //toutes les variables qu'on utilise dans le template
   data() {
-    //toutes les variables qu'on utilise dans le template
     return {  
       customers: [],
       customersFilter:[],
@@ -67,7 +61,6 @@ export default {
   created() {
     let vm = this
     // permet de recupérer tous les documents "client"
- 
     vm.$db.allDocs({
       include_docs: true,
       starkey: 'client_',
@@ -77,7 +70,6 @@ export default {
       vm.customers = docs.rows
       vm.customersFilter = vm.customers 
     });
-    //this.search()
   },
   methods:{
     search:function(){
@@ -86,5 +78,4 @@ export default {
     }
   }
 }
-
 </script>
