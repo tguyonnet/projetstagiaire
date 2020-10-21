@@ -81,7 +81,20 @@ export default {
   methods:{
     search:function(){
       console.log(this.customers)
-      this.customersFilter = this.customers.filter(c => c['id'].includes(this.valueSearch))
+      this.customersFilter = this.customers.filter(c =>{
+        const nom = c.doc.name
+        if(nom){
+          //console.log(c)
+          console.log(nom)
+          console.log(this.valueSearch)
+          nom.includes(this.valueSearch)
+          return true
+        }else{
+          return false
+        }
+       
+        })
+        
     }
   }
 }
