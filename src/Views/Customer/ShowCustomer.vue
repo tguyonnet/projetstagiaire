@@ -78,7 +78,8 @@ export default {
       vm.customersFilter = vm.customers 
     });
     //this.search()
-  },methods:{
+  },
+  methods:{
     search:function(){
       console.log(this.customers)
       this.customersFilter = this.customers.filter(c => c['id'].includes(this.valueSearch))
