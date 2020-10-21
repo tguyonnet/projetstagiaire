@@ -1,9 +1,9 @@
 import Vue from 'vue'   
 import Router from 'vue-router'
-import Clients from './Views/Clients.vue'
+import ShowClients from './Views/Customer/ShowCustomer.vue'
+import AddClients from './Views/Customer/AddCustomer.vue'
 import DevisShow from './Views/DevisShow.vue'
 import DevisEdit from './Views/DevisEdit.vue'
-
 
 Vue.use(Router)
 export default new Router({
@@ -14,8 +14,13 @@ export default new Router({
     },
     {
       path: '/clients',
-      name: 'clients',
-      component: Clients
+      name: 'ShowClients',
+      component: ShowClients
+    },
+    {
+      path: '/clients/add',
+      name: 'AddClients',
+      component: AddClients
     },
     {
       path: '/devisshow',

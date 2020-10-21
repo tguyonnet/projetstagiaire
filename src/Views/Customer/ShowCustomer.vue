@@ -1,6 +1,10 @@
 <template>
   <div class="container">
-    <h1>Clients</h1>
+    <h1>Clients 
+      <button>
+          <router-link class="fa fa-plus" aria-hidden="true" to="/clients/add"/>
+      </button>
+    </h1>
     <v-app id="inspire">
         <v-simple-table>
           <template v-slot:default>
@@ -40,7 +44,7 @@
 
 <script>
 export default {
-  name: 'Clients',
+  name: 'ShowCustomer',
   data() {
     //toutes les variables qu'on utilise dans le template
     return {  
@@ -50,6 +54,7 @@ export default {
   //la méthode created() s'appelle toute seule quand on ouvre la page
   created() {
     let vm = this
+    // permet de recupérer tous les documents "client"
     vm.$db.allDocs({
       include_docs: true,
       starkey: 'client_',
@@ -59,24 +64,5 @@ export default {
       vm.customers = docs.rows
     });
   },
-  methods: {
-    addCustomer: function addCust(data) {
-      var customer = {
-        _id: "C_" + data.name + data.codePostal,
-        nom: data.name,
-        firstName: data.firstName,
-        address: data.address,
-        postCode: data.postCode,
-        city: data.city,
-        email: data.email,
-        phone: data.phone
-      };
-      this.$db.put(customer, function callback(err) {
-        if (!err) {
-          console.log('Successfully posted customer!');
-        }
-      });
-    }
-  }
 }
 </script>
