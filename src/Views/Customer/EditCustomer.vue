@@ -1,6 +1,7 @@
 <template>
-  <FormCustomer />
+  <FormCustomer title='Modifier un client' fromPage='edit'/>
 </template>
+
 
 <script>
 import FormCustomer from '../../components/FormCustomer'
@@ -10,5 +11,8 @@ export default {
   components: {
     FormCustomer
   },
+  methods: {
+
+  }
 }
 </script>

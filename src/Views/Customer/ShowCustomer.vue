@@ -3,7 +3,8 @@
     {{valueSearch}}
     <h1>Clients 
       <button>
-          <router-link class="fa fa-plus" aria-hidden="true" to="/clients/add"/>
+          <router-link to="/clients/add" class="fa fa-plus" aria-haspopup="true"></router-link>
+
       </button>
     </h1>
     <form class="form-inline my-2 my-lg-0">
@@ -36,7 +37,8 @@
                 <td>{{ customer.doc.email }}</td>
                 <td>{{ customer.doc.phone }}</td>
                 <td>         
-                  <button type="button" class="btn btn-primary">Modifier</button>
+                  <router-link class="btn btn-primary" style="color: #fff!important" to="/client/edit">Modifier</router-link>
+                  <!-- <button type="button" class="btn btn-primary">Modifier</button> -->
                   <button type="button" class="btn btn-secondary">Créer devis</button>
                 </td>
               </tr>
@@ -49,6 +51,8 @@
 
 
 <script>
+// import FormCustomer from '../../components/FormCustomer'
+
 export default {
   name: 'ShowCustomer',
   data() {
