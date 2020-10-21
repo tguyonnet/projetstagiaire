@@ -87,8 +87,11 @@ export default {
           //console.log(c)
           console.log(nom)
           console.log(this.valueSearch)
-          nom.includes(this.valueSearch)
-          return true
+         
+          if( nom.includes(this.valueSearch.toUpperCase())){
+            return true
+          }
+         
         }else{
           return false
         }
