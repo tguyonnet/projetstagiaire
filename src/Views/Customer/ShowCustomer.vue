@@ -1,5 +1,11 @@
 <template>
   <div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
+      <li class="breadcrumb-item active" aria-current="page">Client</li>
+    </ol>
+  </nav>
     <h1>Clients 
       <button>
           <router-link to="/clients/add" class="fa fa-plus" aria-haspopup="true"></router-link>

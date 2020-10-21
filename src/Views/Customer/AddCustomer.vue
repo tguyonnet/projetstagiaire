@@ -1,5 +1,7 @@
 <template>
-  <FormCustomer title='Ajouter un client' fromPage='add' />
+  <div>
+    <FormCustomer title='Ajouter un client' fromPage='add' />
+  </div>
 </template>
 
 
