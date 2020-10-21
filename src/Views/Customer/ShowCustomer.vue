@@ -2,7 +2,8 @@
   <div class="container">
     <h1>Clients 
       <button>
-          <router-link class="fa fa-plus" aria-hidden="true" to="/clients/add"/>
+          <router-link to="/clients/add" class="fa fa-plus" aria-haspopup="true"></router-link>
+
       </button>
     </h1>
     <v-app id="inspire">
