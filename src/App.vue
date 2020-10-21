@@ -39,10 +39,8 @@
                 <button type="button" id="sidebarCollapse" class="btn btn-info">
                   <i class="fas fa-align-left"></i>
                 </button>
-                <form class="form-inline my-2 my-lg-0">
-                  <input class="form-control mr-sm-2" type="text" placeholder="Entrer une recherche">
-                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
-                </form>   
+             
+             
               </div>
             </nav> 
             <router-view/> <!-- Affichage des views appelées-->

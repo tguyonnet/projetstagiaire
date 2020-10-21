@@ -1,13 +1,18 @@
 <template>
   <div class="container">
-    {{valueSearch}}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
+      <li class="breadcrumb-item active" aria-current="page">Client</li>
+    </ol>
+  </nav>
     <h1>Clients 
       <button>
           <router-link to="/client/add" class="fa fa-plus" aria-haspopup="true"></router-link>
       </button>
     </h1>
     <form class="form-inline my-2 my-lg-0">
-      <input v-model="valueSearch" class="form-control mr-sm-2" type="text" placeholder="Search">{{valueSearch}}
+      <input v-model="valueSearch" class="form-control mr-sm-2" type="text" placeholder="Search">
       <button @click="search()" class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
     </form>
     <v-app id="inspire">
@@ -74,7 +79,23 @@ export default {
   methods:{
     search:function(){
       console.log(this.customers)
-      this.customersFilter = this.customers.filter(c => c['id'].includes(this.valueSearch))
+      this.customersFilter = this.customers.filter(c =>{
+        const nom = c.doc.name
+        if(nom){
+          //console.log(c)
+          console.log(nom)
+          console.log(this.valueSearch)
+         
+          if( nom.includes(this.valueSearch.toUpperCase())){
+            return true
+          }
+         
+        }else{
+          return false
+        }
+       
+        })
+        
     }
   }
 }
