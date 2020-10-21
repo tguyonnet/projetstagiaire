@@ -3,6 +3,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
+    height: 100%;
 }
 
 p {
@@ -54,6 +55,7 @@ a:focus {
 }
 
 #sidebar {
+
     min-width: 250px;
     max-width: 250px;
     background: #7386D5;
@@ -112,7 +114,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #6d7fcc;
+    background: #7386D5;
 }
 
 
@@ -144,3 +146,7 @@ ul ul a {
     }
 }
 
+#footfoot {
+    background-color: #6d7fcc;
+    font-weight: bold;
+}
