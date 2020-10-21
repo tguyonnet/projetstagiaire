@@ -7,7 +7,7 @@
       </button>
     </h1>
     <form class="form-inline my-2 my-lg-0">
-      <input v-model="valueSearch" class="form-control mr-sm-2" type="text" placeholder="Search">{{valueSearch}}
+      <input v-model="valueSearch" class="form-control mr-sm-2" type="text" placeholder="Search">
       <button @click="search()" class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
     </form>
     <v-app id="inspire">
@@ -80,8 +80,8 @@ export default {
   },
   methods:{
     search:function(){
-     // console.log(this.customers)
-      this.customersFilter = this.customers.filter(c => c['name'].includes(this.valueSearch))
+      console.log(this.customers)
+      this.customersFilter = this.customers.filter(c => c['id'].includes(this.valueSearch))
     }
   }
 }
