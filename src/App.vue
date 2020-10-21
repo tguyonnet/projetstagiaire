@@ -43,28 +43,32 @@
                     <form class="form-inline my-2 my-lg-0">
                       <input class="form-control mr-sm-2" type="text" placeholder="Search">
                       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                   
-                </div>
+                    </form>               
+                 </div>
+              <div class="container-fluid">
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                  <i class="fas fa-align-left"></i>
+                </button>
+                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <i class="fas fa-align-justify"></i>
+                </button>
+                <form class="form-inline my-2 my-lg-0">
+                  <input class="form-control mr-sm-2" type="text" placeholder="Entrer une recherche">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+                </form>   
+              </div>
             </nav> 
             <router-view/> <!-- Affichage des views appelées-->
         </div>  
       </div>
 
-      <!-- Footer -->
-<footer class="page-footer font-small">
+      <footer class="page-footer font-small">
+        <div class="footer-copyright text-center py-3" id=footfoot>© 2020 Copyright:
+          <a href="#">CESI Groupe 3 PFR</a>
+        </div>
+      </footer>
+    </div>
 
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3" id=footfoot>© 2020 Copyright:
-    <a href="#">CESI Groupe 3 PFR</a>
-  </div>
-  <!-- Copyright -->
-
-</footer>
-<!-- Footer -->
-  </div>
-
-  
 </template>
 
 
