@@ -1,5 +1,5 @@
 <template>
-  <FormCustomer title='Modifier un client' />
+  <FormCustomer title='Modifier un client' fromPage='edit'/>
 </template>
 
 

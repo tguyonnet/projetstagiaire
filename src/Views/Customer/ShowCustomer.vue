@@ -21,7 +21,7 @@
               </tr>
             </thead>
             <tbody v-if="customers.length > 0">
-              <tr v-for="customer in customers" :key="customer.name">
+              <tr v-for="customer in customers" :key="customer">
                 <td>{{ customer.doc.name }}</td>
                 <td>{{ customer.doc.firstName }}</td>
                 <td>{{ customer.doc.address }}</td>
@@ -30,7 +30,7 @@
                 <td>{{ customer.doc.email }}</td>
                 <td>{{ customer.doc.phone }}</td>
                 <td>         
-                  <router-link class="btn btn-primary" to="/client/edit">Modifier</router-link>
+                  <router-link class="btn btn-primary" style="color: #fff!important" to="/client/edit">Modifier</router-link>
                   <!-- <button type="button" class="btn btn-primary">Modifier</button> -->
                   <button type="button" class="btn btn-secondary">Créer devis</button>
                 </td>
