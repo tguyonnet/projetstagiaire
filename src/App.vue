@@ -30,6 +30,29 @@
                 <router-link to="/clients" class="nav-link dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clients</router-link>
               </li>          
             </ul>   
+                <li>
+                   <router-link to="/" class="nav-link dropdown " data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Accueil</router-link>
+                </li>   
+                <li>
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Edition Devis</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                       <router-link to="/devisedit" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Créer</router-link>
+
+                        </li>
+                        <li>
+                           <router-link to="#" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Modifier</router-link>
+                        </li>
+                        <li>
+                       <router-link to="/devisshow" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Consulter</router-link>
+
+                        </li>
+                    </ul>
+                </li>
+                <li class="active">
+                  <router-link to="/clients" class="nav-link dropdown active" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Consulter les clients</router-link>
+                </li>          
+            </ul>
         </nav>
 
         <!-- Page Content  -->
