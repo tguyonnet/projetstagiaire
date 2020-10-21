@@ -1,16 +1,17 @@
 import Vue from 'vue'   
 import Router from 'vue-router'
 import ShowClients from './Views/Customer/ShowCustomer.vue'
-import AddClients from './Views/Customer/AddCustomer.vue'
-import DevisShow from './Views/DevisShow.vue'
-import DevisEdit from './Views/DevisEdit.vue'
+import AddCustomer from './Views/Customer/AddCustomer.vue'
+import EditCustomer from './Views/Customer/EditCustomer.vue'
+import ShowQuote from './Views/Quote/ShowQuote.vue'
+import EditQuote from './Views/Quote/EditQuote.vue'
 
 Vue.use(Router)
 export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'home'
     },
     {
       path: '/clients',
@@ -18,19 +19,29 @@ export default new Router({
       component: ShowClients
     },
     {
-      path: '/clients/add',
-      name: 'AddClients',
-      component: AddClients
+      path: '/client/add',
+      name: 'AddCustomer',
+      component: AddCustomer
     },
     {
-      path: '/devisshow',
-      name: 'devisshow',
-      component: DevisShow 
+      path: '/client/edit',
+      name: 'EditCustomer',
+      component: EditCustomer
     },
     {
-      path: '/devisedit',
-      name: '/devisedit',
-      component: DevisEdit
+      path: '/devis',
+      name: 'ShowQuote',
+      component: ShowQuote 
+    },
+    {
+      path: '/devis/edit',
+      name: 'EditQuote',
+      component: EditQuote
+    },
+    {
+      path: '/devis/add',
+      name: 'AddQuote',
+      component: EditQuote
     }
   ]
 })
