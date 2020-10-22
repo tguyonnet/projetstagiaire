@@ -3,7 +3,7 @@
 
      <div class="wrapper">
         <!-- Sidebar  -->
-        <nav id="sidebar">
+        <nav id="sidebar" v-bind:class="{ active: isActive }">
             <div class="sidebar-header">
                 <h3> <router-link to="/" class="nav-link dropdown " data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">MADERA</router-link></h3>
             </div>
@@ -33,7 +33,7 @@
         <div id="content">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
               <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <button type="button" id="sidebarCollapse" class="btn btn-info" v-on:click="isActive = !isActive">
                   <i class="fas fa-align-left"></i>
                 </button>
               </div>
@@ -55,9 +55,13 @@
 <script>
 export default {
   name: 'App',
-  components: {
+  data() {
+    return {
+      isActive: false
+    }
   },
-  
+  components: {
+  }
 }
 </script>
 
