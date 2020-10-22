@@ -16,13 +16,10 @@
                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Devis</a>
                 <ul class="collapse list-unstyled" id="homeSubmenu">
                   <li>
-                    <router-link to="/devisedit" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Créer</router-link>
+                    <router-link to="/devis/add" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Créer</router-link>
                   </li>
                   <li>
-                    <router-link to="#" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Modifier</router-link>
-                  </li>
-                  <li>
-                    <router-link to="/devisshow" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Consulter</router-link>
+                    <router-link to="/devis" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Consulter</router-link>
                   </li>
                 </ul>
               </li>
@@ -39,11 +36,10 @@
                 <button type="button" id="sidebarCollapse" class="btn btn-info">
                   <i class="fas fa-align-left"></i>
                 </button>
-             
-             
               </div>
             </nav> 
             <router-view/> <!-- Affichage des views appelées-->
+            <h2>Page d'Accueil</h2>
             <footer class="page-footer font-small">
               <div class="footer-copyright text-center py-3" id=footfoot>© 2020 Copyright: CESI Groupe 3 PFR
               </div>
