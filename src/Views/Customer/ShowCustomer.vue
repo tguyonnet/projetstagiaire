@@ -2,7 +2,7 @@
   <div class="container my-5">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><router-link :to="{name:'home'}"><i class="fa fa-home"></i></router-link></li>
+        <li class="breadcrumb-item"><router-link :to="{name:'Home'}"><i class="fa fa-home"></i></router-link></li>
         <li class="breadcrumb-item active" aria-current="page">Client</li>
       </ol>
     </nav>
@@ -12,7 +12,7 @@
       </button>
     </h1>
     <form class="form-inline my-2 my-lg-0" style="place-content:center">
-      <input v-model="valueSearch" class="form-control mr-sm-2" type="text" placeholder="Recherche..">
+      <input v-model="valueSearch" class="form-cotrol mr-sm-2" type="text" placeholder="Recherche..">
       <button @click="search()" class="btn btn-outline-success my-2 my-sm-0" type="submit" >Rechercher</button>
     </form>
     <v-app id="inspire">
@@ -41,7 +41,7 @@
                 <td>{{ customer.value.email }}</td>
                 <td>{{ customer.value.phone }}</td>
                 <td>         
-                  <router-link class="btn btn-primary" style="color: #fff!important" :to="{name:'EditCustomer', params:{key: customer.value.key}}">Modifier</router-link>
+                  <router-link class="btn btn-primary" style="color: #fff!important" :to="{name:'EditCustomer', params:{key: customer.value._id}}">Modifier</router-link>
                   <button type="button" class="btn btn-secondary">Créer devis</button>
                 </td>
               </tr>
@@ -122,17 +122,13 @@ export default {
           //console.log(c)
           //console.log(nom)
           //console.log(this.valueSearch)
-         
           if( nom.includes(this.valueSearch.toUpperCase())){
             return true
-          }
-         
+          }   
         }else{
           return false
         }
-       
-        })
-        
+      })
     }
   }
 }
