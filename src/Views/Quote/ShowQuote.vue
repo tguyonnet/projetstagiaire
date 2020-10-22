@@ -25,7 +25,7 @@
               <th class="text-left"> Statut</th>     
             </tr>
           </thead>
-          <tbody v-if="quotes.length > 0">
+          <tbody v-if="quotes.length > 0">  
             <tr v-for="onlyDevis in quotes" :key="onlyDevis.number">
               <td>{{ onlyDevis.value.key}}</td>
               <td>{{ onlyDevis.value.nameDevis }}</td>
@@ -35,7 +35,7 @@
               <td>{{ onlyDevis.value.puht}}</td>
               <td>{{ onlyDevis.value.status}}</td>
               <td>
-                <router-link class="btn btn-primary" to="/devis/modifier">Modifier</router-link>
+                <router-link class="btn btn-primary" style="color: #fff!important" to="/devis/modifier">Modifier</router-link>
               </td>
             </tr>
           </tbody> 
@@ -52,25 +52,12 @@ export default {
     return {
       quotes: [],
       quotesFilter: [],
-      valueSearch:''
     }
   },
     created() {
      this.findAllquotes(this)
   },
   methods:{
-    search(){
-      // console.log(this.quotes)
-      this.quotesFilter = this.quotes.filter(cust =>{
-        let nom = cust.value.name
-        if(nom){
-          if( nom.includes(this.valueSearch.toUpperCase())){
-            return true
-          }   
-        }
-        return false
-      })
-    },
     findAllquotes(vm) {
       axios.get(vm.$api + "/_design/function/_view/vue_devis_sans_erreur",{
         headers: {
