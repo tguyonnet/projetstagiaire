@@ -8,7 +8,7 @@
     </nav>
     <h1>Consultation des devis
       <button>
-        <router-link class="fa fa-plus" aria-hidden="true" to="/devis/add"/>
+        <router-link class="fa fa-plus" aria-hidden="true" to="/devis/ajouter"/>
       </button>
     </h1>
     <v-app id="inspire">
@@ -33,7 +33,7 @@
               <td></td>
               <td></td>
               <td>
-                <router-link class="btn btn-primary" to="/devisedit">Modifier</router-link>
+                <router-link class="btn btn-primary" to="/devis/modifier">Modifier</router-link>
                 <button type="button" >Modifier</button>
               </td>
             </tr>

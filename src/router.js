@@ -42,7 +42,7 @@ export default new Router({
       component: ShowQuote 
     },
     {
-      path: '/devis/modifier',
+      path: '/devis/modifier/:key',
       name: 'EditQuote',
       component: EditQuote
     },
