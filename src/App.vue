@@ -16,7 +16,7 @@
                 <a href="#homeSubmenu" data-toggle="collapse" role="button" aria-expanded="false" class="dropdown-toggle" v-on:click="dropdown = !dropdown">Devis</a>
                 <ul class="list-unstyled" id="homeSubmenu" v-bind:class="{collapse: dropdown}">
                   <li>
-                    <router-link to="/devis/add" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Créer</router-link>
+                    <router-link to="/devis/ajouter" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Créer</router-link>
                   </li>
                   <li>
                     <router-link to="/devis" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Consulter</router-link>
@@ -39,7 +39,6 @@
               </div>
             </nav> 
             <router-view/> <!-- Affichage des views appelées-->
-            <h2>Page d'Accueil</h2>
             <footer class="page-footer font-small">
               <div class="footer-copyright text-center py-3" id=footfoot>© 2020 Copyright: CESI Groupe 3 PFR
               </div>

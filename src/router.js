@@ -1,6 +1,8 @@
 import Vue from 'vue'   
 import Router from 'vue-router'
-import ShowClients from './Views/Customer/ShowCustomer.vue'
+import Home from './Views/Home.vue'
+import NotFound from './Views/NotFound.vue'
+import ShowCustomer from './Views/Customer/ShowCustomer.vue'
 import AddCustomer from './Views/Customer/AddCustomer.vue'
 import EditCustomer from './Views/Customer/EditCustomer.vue'
 import ShowQuote from './Views/Quote/ShowQuote.vue'
@@ -10,21 +12,27 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      path: '*',
+      name: 'NotFound',
+      component: NotFound
+    },
+    {
       path: '/',
-      name: 'home'
+      name: 'Home',
+      component: Home
     },
     {
       path: '/clients',
-      name: 'ShowClients',
-      component: ShowClients
+      name: 'ShowCustomer',
+      component: ShowCustomer
     },
     {
-      path: '/client/add',
+      path: '/client/ajouter',
       name: 'AddCustomer',
       component: AddCustomer
     },
     {
-      path: '/client/edit',
+      path: '/client/modifier/:key',
       name: 'EditCustomer',
       component: EditCustomer
     },
@@ -34,12 +42,12 @@ export default new Router({
       component: ShowQuote 
     },
     {
-      path: '/devis/edit',
+      path: '/devis/modifier',
       name: 'EditQuote',
       component: EditQuote
     },
     {
-      path: '/devis/add',
+      path: '/devis/ajouter',
       name: 'AddQuote',
       component: EditQuote
     }
