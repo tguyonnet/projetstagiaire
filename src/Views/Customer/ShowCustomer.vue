@@ -32,15 +32,16 @@
             </thead>
             <tbody v-if="customers.length > 0">
               <tr v-for="customer in customersFilter" :key="customer.name">
-                <td>{{ customer.doc.name }}</td>
-                <td>{{ customer.doc.firstName }}</td>
-                <td>{{ customer.doc.address }}</td>
-                <td>{{ customer.doc.postCode }}</td>
-                <td>{{ customer.doc.city }}</td>
-                <td>{{ customer.doc.email }}</td>
-                <td>{{ customer.doc.phone }}</td>
+                
+                <td>{{ customer.value.name }}</td>
+                <td>{{ customer.value.firstName }}</td>
+                <td>{{ customer.value.address }}</td>
+                <td>{{ customer.value.postCode }}</td>
+                <td>{{ customer.value.city }}</td>
+                <td>{{ customer.value.email }}</td>
+                <td>{{ customer.value.phone }}</td>
                 <td>         
-                  <router-link class="btn btn-primary" style="color: #fff!important" :to="{path:'/client/edit', params:{customer: customer.doc._id}}">Modifier</router-link>
+                  <router-link class="btn btn-primary" style="color: #fff!important" :to="{path:'/client/edit', params:{customer: customer.value._id}}">Modifier</router-link>
                   <button type="button" class="btn btn-secondary">Créer devis</button>
                 </td>
               </tr>
@@ -52,6 +53,7 @@
 </template>
 
 <script>
+  const axios = require('axios');
 export default {
   name: 'ShowCustomer',
   //toutes les variables qu'on utilise dans le template
@@ -66,7 +68,8 @@ export default {
   created() {
     let vm = this
     // permet de recupérer tous les documents "client"
-    vm.$db.allDocs({
+   // vm.customers = vm.$dm.replicate.to("https://28bca146-7c07-46d2-b259-679296a4cb7c-bluemix.cloudant.com/madera/_design/function/_view/vue_client")
+    /*vm.$db.allDocs({
       include_docs: true,
       starkey: 'client_',
       endkey: 'client_\uffff'
@@ -87,16 +90,34 @@ export default {
         }
        
         })
-      
-      console.log(vm.customers )
-      vm.customersFilter = vm.customers 
-    });
+    });*/
+   
+    console.log("get")  
+    const token = btoa('apikey-69bcda5d6c17493f9ec349fa46f40c94:2565427be305db84eb986983bc4cfc5cee866370')
+       axios.get("https://28bca146-7c07-46d2-b259-679296a4cb7c-bluemix.cloudant.com/madera/_design/function/_view/vue_client",
+        {
+        headers: {
+          'Authorization': `Basic ${token}` 
+        }
+      })
+     .then(function (response) {
+       // handle success
+       console.log(response);
+       
+       vm.customers = response.data.rows
+       console.log(  vm.customers);
+        console.log(  vm.customers[0].value.name);
+       vm.customersFilter = vm.customers 
+     }).catch(function (error) {
+       // handle error
+       console.log(error);
+     })
   },
   methods:{
     search:function(){
       console.log(this.customers)
       this.customersFilter = this.customers.filter(c =>{
-        const nom = c.doc.name
+        const nom = c.value.name
         if(nom){
           //console.log(c)
           //console.log(nom)
