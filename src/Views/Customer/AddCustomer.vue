@@ -1,5 +1,12 @@
 <template>
-  <div>
+  <div class="container my-5">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><router-link :to="{name:'home'}"><i class="fa fa-home"></i></router-link></li>
+        <li class="breadcrumb-item"><router-link :to="{name:'ShowCustomer'}">Clients</router-link></li>
+        <li class="breadcrumb-item active">Ajouter</li>
+      </ol>
+    </nav>
     <FormCustomer title='Ajouter un client' fromPage='add' />
   </div>
 </template>
