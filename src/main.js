@@ -3,17 +3,18 @@ import App from './App.vue'
 import router from './router.js'
 import PouchDB from 'pouchdb'
 import vuetify from './plugins/vuetify';
+import Donut from 'vue-css-donut-chart';
+import 'vue-css-donut-chart/dist/vcdonut.css';
+
+Vue.use(Donut);
 
 Vue.config.productionTip = false
 
 //PUCHDB
-const db = new PouchDB('madera');
-Vue.prototype.$db = db;
-const token = btoa('apikey-69bcda5d6c17493f9ec349fa46f40c94:2565427be305db84eb986983bc4cfc5cee866370');
-Vue.prototype.$token = token;
-const api = 'https://apikey-69bcda5d6c17493f9ec349fa46f40c94:2565427be305db84eb986983bc4cfc5cee866370@28bca146-7c07-46d2-b259-679296a4cb7c-bluemix.cloudant.com/madera';
-Vue.prototype.$api = api;
- 
+var db = new PouchDB('madera');
+Vue.prototype.$db = db
+var remoteCouch = 'https://apikey-69bcda5d6c17493f9ec349fa46f40c94:2565427be305db84eb986983bc4cfc5cee866370@28bca146-7c07-46d2-b259-679296a4cb7c-bluemix.cloudant.com/madera';
+
 //SHORTID
 const shortid = require('shortid');
 shortid.characters('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$@');
@@ -26,13 +27,20 @@ function sync() {
       return doc._id.indexOf('_design') !== 0;
     }
   };
-  db.replicate.to(api, opts);
-  db.replicate.from(api, opts);
+  db.replicate.to(remoteCouch, opts, syncError);
+  db.replicate.from(remoteCouch, opts, syncError);
 }
 
-if (api) {
+
+// There was some form or error syncing
+function syncError() {
+}
+
+if (remoteCouch) {
   sync();
 }
+
+
 
 new Vue({
   router,
