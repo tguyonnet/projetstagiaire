@@ -7,7 +7,6 @@
         <li class="breadcrumb-item active">Modifier</li>
       </ol>
     </nav>
-    <!-- {{ customer }} -->
     <div v-if="customer">
       <FormCustomer title='Modifier un client' fromPage='edit' :customer="customer"/>
     </div>
@@ -16,34 +15,36 @@
 
 <script>
 import FormCustomer from '../../components/FormCustomer'
+
 export default {
   name: 'EditCustomer',
   data() {
     return {
-      key: this.$route.params.key,
+      id: this.$route.params.id,
       customersFilter:[],
       customer: '',
     }
   },
   created() {
-    if (this.key == null) {
+    //Si il n'y a pas d'id de passé en param, on renvoie vers la page 404
+    if (this.id == null) {
         this.$router.push({ name: 'NotFound'})
     }
-    
+    //sinon on va chercher le client qu'on veut modifier
     this.findOneCustomer(this)
   },
   components: {
+    //on utilise le formulaire de commun a l'ajout et la modification de clients
     FormCustomer
   },
   methods: {
     findOneCustomer(vm) {
-      vm.$db.get(vm.key)     
+      vm.$db.get(vm.id)     
       .then(function (response) {
-        // handle success
-        // console.log(response) 
+       // Succes de la requete
         vm.customer = response
       }).catch(function (error) {
-        // handle error
+       // Erreur de la requete
         console.log(error);
       })
     }

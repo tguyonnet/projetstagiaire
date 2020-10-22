@@ -1,17 +1,23 @@
 <template>
-  <div class="container my-5">
+  <div class="container">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><router-link :to="{name:'Home'}"><i class="fa fa-home"></i></router-link></li>
         <li class="breadcrumb-item active" aria-current="page">Devis</li>
       </ol>
     </nav>
-    <h1>Devis 
+    <h1>
+      Devis 
       <button>
           <router-link :to="{name:'AddQuote'}" class="fa fa-plus" aria-haspopup="true"></router-link>
       </button>
     </h1>
+    <form class="form-inline my-2 my-lg-0" style="place-content:center">
+      <input v-model="valueSearch" class="form-cotrol mr-sm-2" type="text" placeholder="Recherche..">
+      <button @click="search()" class="btn btn-outline-success my-2 my-sm-0" type="submit" >Rechercher</button>
+    </form>
     <v-app id="inspire">
+      <!-- Tableau de devis -->
       <v-simple-table>
         <template v-slot:default>
           <thead>
@@ -26,24 +32,25 @@
             </tr>
           </thead>
           <tbody v-if="quotes.length > 0">  
-            <tr v-for="onlyDevis in quotes" :key="onlyDevis.number">
-              <td>{{ onlyDevis.value.key}}</td>
-              <td>{{ onlyDevis.value.nameDevis }}</td>
-              <td>{{ onlyDevis.value.dateCreate}}</td>
-              <td>{{ onlyDevis.value.keyCommercial }}</td>
-              <td>{{ onlyDevis.value.keyClient}}</td>
-              <td>{{ onlyDevis.value.puht}}</td>
-              <td>{{ onlyDevis.value.status}}</td>
+            <tr v-for="quote in quotes" :key="quote.number">
+              <td>{{ quote.value.key}}</td>
+              <td>{{ quote.value.nameDevis }}</td>
+              <td>{{ quote.value.dateCreate}}</td>
+              <td>{{ quote.value.keyCommercial }}</td>
+              <td>{{ quote.value.keyClient}}</td>
+              <td>{{ quote.value.puht}}</td>
+              <td>{{ quote.value.status}}</td>
               <td>
-                <router-link class="btn btn-primary" style="color: #fff!important" to="/devis/modifier">Modifier</router-link>
+                <router-link class="btn btn-primary" style="color: #fff!important" :to="{name:'EditQuote', params:{id: quote.value._id}}">Modifier</router-link>
               </td>
             </tr>
           </tbody> 
         </template>
       </v-simple-table>
-      </v-app>  
+    </v-app>  
   </div>
 </template>
+
 <script>
 const axios = require('axios');
 export default {
@@ -52,12 +59,25 @@ export default {
     return {
       quotes: [],
       quotesFilter: [],
+      valueSearch:'',
     }
   },
-    created() {
+  created() {
+    //au démarrage de la page, on va chercher les devis
      this.findAllquotes(this)
   },
   methods:{
+    search(){
+      this.quotesFilter = this.quotes.filter(quote =>{
+        let name = quote.value.name
+        if(name){
+          if( name.includes(this.valueSearch.toUpperCase())){
+            return true
+          }   
+        }
+        return false
+      })
+    },
     findAllquotes(vm) {
       axios.get(vm.$api + "/_design/function/_view/vue_devis_sans_erreur",{
         headers: {
@@ -65,11 +85,11 @@ export default {
         }
       })
      .then(function (response) {
-       // handle success
+       // Succes de la requete
        vm.quotes = response.data.rows
        vm.quotesFilter = vm.quotes 
      }).catch(function (error) {
-       // handle error
+       // Erreur de la requete
        console.log(error);
      })
 

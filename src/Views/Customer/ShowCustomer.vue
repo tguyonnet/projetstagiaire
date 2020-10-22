@@ -6,7 +6,8 @@
         <li class="breadcrumb-item active" aria-current="page">Clients</li>
       </ol>
     </nav>
-    <h1>Clients 
+    <h1>
+      Clients 
       <button>
           <router-link :to="{name:'AddCustomer'}" class="fa fa-plus" aria-haspopup="true"></router-link>
       </button>
@@ -40,7 +41,7 @@
                 <td>{{ customer.value.email }}</td>
                 <td>{{ customer.value.phone }}</td>
                 <td>         
-                  <router-link class="btn btn-primary" style="color: #fff!important" :to="{name:'EditCustomer', params:{key: customer.value._id}}">Modifier</router-link>
+                  <router-link class="btn btn-primary" style="color: #fff!important" :to="{name:'EditCustomer', params:{id: customer.value._id}}">Modifier</router-link>
                   <router-link class="btn btn-secondary" style="color: #fff!important" :to="{name:'AddQuote'}">Créer devis</router-link>
                 </td>
               </tr>
@@ -95,9 +96,9 @@ export default {
     search(){
       // console.log(this.customers)
       this.customersFilter = this.customers.filter(cust =>{
-        let nom = cust.value.name
-        if(nom){
-          if( nom.includes(this.valueSearch.toUpperCase())){
+        let name = cust.value.name
+        if(name){
+          if( name.includes(this.valueSearch.toUpperCase())){
             return true
           }   
         }
@@ -118,7 +119,6 @@ export default {
        // handle error
        console.log(error);
      })
-
     }
   }
 }

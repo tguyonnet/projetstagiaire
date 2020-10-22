@@ -36,7 +36,7 @@ export default new Router({
       component: AddCustomer
     },
     {
-      path: '/client/modifier/:key',
+      path: '/client/modifier/:id',
       name: 'EditCustomer',
       component: EditCustomer
     },
@@ -46,7 +46,7 @@ export default new Router({
       component: ShowQuote 
     },
     {
-      path: '/devis/modifier/:key',
+      path: '/devis/modifier/:id',
       name: 'EditQuote',
       component: EditQuote
     },

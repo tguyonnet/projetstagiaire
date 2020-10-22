@@ -1,59 +1,51 @@
 <template>
-  <div class="about">
-      <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
-      <li class="breadcrumb-item active" aria-current="page">Devis</li>
-    </ol>
-  </nav>
-    <h1>Gestion des devis</h1>
-     <FormQuote title='Modifier un devis' fromPage='edit' />
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><router-link :to="{name:'Home'}"><i class="fa fa-home"></i></router-link></li>
+        <li class="breadcrumb-item"><router-link :to="{name:'ShowQuote'}">Devis</router-link></li>
+        <li class="breadcrumb-item active">Modifier</li>
+      </ol>
+    </nav>
+    <div v-if="quote">
+      <FormQuote title='Modifier un devis' fromPage='edit' :quote="quote"/>
+    </div>
   </div>
-  
 </template>
+
 <script>
-//import FormDevis from '../../components/FormDevis'
-const axios = require('axios');
+import FormQuote from '../../components/FormQuote.vue'
+
 export default {
   name: 'EditQuote',
   data(){
     return {
-      key:this.$route.params.key,
+      id: this.$route.params.id,
       quoteFilters:[],
+      quote: '',
     }
-
   },
   created(){
+    //Si il n'y a pas d'id de passé en param, on renvoie vers la page 404
     if (this.key == null) {
         this.$router.push({ name: 'NotFound'})
     }
-    
     this.findOneQuote(this)
   },
   components:{
-    //FormDevis
+    //on utilise le formulaire de commun a l'ajout et la modification de devis
+    FormQuote
   },
   methods:{
     findOneCustomer(vm) {
-       axios.get(vm.$api + "/_design/function/_view/vue_devis_sans_erreur",{
-        headers: {
-          'Authorization': `Basic ${vm.$token}` 
-        }
+      vm.$db.get(vm.id)     
+      .then(function (response) {
+       // Succes de la requete
+        vm.quote = response
+      }).catch(function (error) {
+       // Erreur de la requete
+        console.log(error);
       })
-     .then(function (response) {
-      vm.customersFilter = response.data.rows.filter(c =>{
-      const id = c.id       
-        if( id.includes(vm.key)){
-          console.log(c)
-          return true
-        }else{
-          return false
-        }
-      })
-     }).catch(function (error) {
-       // handle error
-       console.log(error);
-     })
     }
   }, 
 }

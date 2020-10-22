@@ -11,16 +11,14 @@
   </div>
 </template>
 
-
 <script>
 import FormCustomer from '../../components/FormCustomer'
 
 export default {
   name: 'AddCustomer',
   components: {
+    //on utilise le formulaire de commun a l'ajout et la modification de clients
     FormCustomer
   },
-  methods: {
-  }
 }
 </script>
