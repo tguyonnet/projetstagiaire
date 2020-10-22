@@ -33,7 +33,7 @@
               <td></td>
               <td></td>
               <td>
-                <router-link class="btn btn-primary" to="/devisedit">Modifier</router-link>
+                <router-link class="btn btn-primary" to="/devis/modifier">Modifier</router-link>
                 <button type="button" >Modifier</button>
               </td>
             </tr>

@@ -25,7 +25,7 @@
                     </v-row>
                     <v-row>
                         <v-col cols="12" md="5">
-                            <v-text-field v-model="dataForm.name" label ="Prénom du client" required></v-text-field>
+                            <v-text-field v-model="dataForm.firstname" label ="Prénom du client" required></v-text-field>
                         </v-col>
                     </v-row>
                     <v-row>
@@ -35,11 +35,11 @@
                             </v-subheader>
                         </v-col>
                         <v-col>
-                            <v-select>
+                            <v-select
                                 v-model="select" :hint="`${select.state}, ${select.abbr}`"
                                 :items="items" item-text="state" item-value="abbr"
                                 label="Select" persistent-hint return-object
-                                single-line
+                                single-line>
                             </v-select>
                         </v-col>
                     </v-row>
@@ -50,7 +50,7 @@
                     </v-row>
                     <v-btn v-if="fromPage == 'add'" :disabled="!valid" color="success" class="mr-4" @click="validate">Valider</v-btn>
                     <v-btn v-if="fromPage == 'edit'" :disabled="!valid" color="warning" class="mr-4" @click="modifiate">Modifier</v-btn>
-                    <v-btn color="gray" class="mr-4" @click="reset">Réinitialiser</v-btn>
+                    <v-btn color="blue" class="mr-4" @click="reset">Réinitialiser</v-btn>
                 </v-container>
             </v-form>
         </v-app>
@@ -79,8 +79,8 @@ export default {
                 num_devis: '',
                 date_devis: '',
                 commercial_devis:'',
-                nomClient_devis:'',
-                prenomClient_devis:'',
+                nom_client:'',
+                prenom_client:'',
                 gamme_devis:'',
 
             },          
@@ -92,8 +92,7 @@ export default {
                 rules.push(v => !!v || 'Le champ ' + field + ' est obligatoire')
                 if (field == 'Date du devis') {
                     rules.push(v => (v && v.length >= 10))
-                }
-                
+                }               
                 return rules
             }, 
             validate() {
@@ -101,16 +100,19 @@ export default {
                     this.addDevis(this.dataForm);
                 }
             },
+            reset(){
+                this.isFormValid = false
+            },
             addDevis(data){
                 let vu = this
                 data.key = this.shortid.generate()
                 var devis = {
-                    _id : "devis_" + data.nomClient_devis+ "_"+ data.key,
+                    _id : "devis_" + data.num_devis+ "_" + data.nom_client+ "_" + data.commercial_devis + "_"+ data.key,
                     key : data.key,
                     num_devis : data.num_devis,
                     date_devis : data.date_devis,
                     commercial_devis : data.commercial_devis,
-                    nom_client : data.nomClient_devis,
+                    nom_client : data.nom_client,
                     gamme_devis: data.gamme_devis 
                 };
             vu.$db.put(devis, function callback(err) {
