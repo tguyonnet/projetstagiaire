@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container my-5">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
