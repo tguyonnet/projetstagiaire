@@ -2,9 +2,15 @@
   <div class="container">
     <h1>{{ title }}</h1>
     <div>
-      <v-alert v-if="isFormValid" type="success">
-        Le client a été ajouté !
+      <v-alert v-if="isFormValid" type="success" style="background:green">
+        <span v-if="this.fromPage == 'add'">Le client a été ajouté !</span>
+        <span v-if="this.fromPage == 'edit'">Le client a été modifié !</span>
       </v-alert>
+      <div v-if="errors.length > 0">
+        <v-alert type="error" style="background:red" v-for="error in errors" :key="error">
+          <span>{{ error }}</span>
+        </v-alert>
+      </div>
     </div>
     <v-app id="inspire">
       <v-form v-model="valid" ref="formCustomer">
@@ -37,7 +43,7 @@
             </v-col>
           </v-row>
           <v-btn v-if="fromPage == 'add'" :disabled="!valid" color="success" class="mr-4" @click="validate">Valider</v-btn>
-          <v-btn v-if="fromPage == 'edit'" :disabled="!valid" color="warning" class="mr-4" @click="modifiate">Modifier</v-btn>
+          <v-btn v-if="fromPage == 'edit'" :disabled="!valid" color="warning" class="mr-4" @click="validate">Modifier</v-btn>
           <v-btn color="gray" class="mr-4" @click="reset">Réinitialiser</v-btn>
         </v-container>
       </v-form>
@@ -64,12 +70,14 @@ export default {
         email: '',
         phone: '',
       },
+      errors: [],
     }
   },
   created() {
-    if (this.customerID != null) {
-      //
+    if (this.customer) {
+      this.dataForm = this.customer
     }
+    // console.log(this.customer)
   },
   methods: {
     // les règles de tous les champs, fait en fonction pour que ce soit générique
@@ -89,7 +97,13 @@ export default {
     validate () {
       if (this.valid) {
         this.$refs.formCustomer.validate()
-        this.addCustomer(this.dataForm);
+        if (this.fromPage == 'add') {
+          this.addCustomer(this.dataForm);
+        }
+        if (this.fromPage == 'edit') {
+          console.log('form validé')
+          this.editCustomer(this.dataForm);
+        }
       }
     },
     reset () {
@@ -118,10 +132,40 @@ export default {
       // on envoie le client en BDD
       vm.$db.put(customer, function callback(err) {
         if (!err) {
-          // console.log('Customer added!');
+          // console.log('client ajouté!');
           vm.reset()
           vm.resetValidation()
           vm.isFormValid = true
+        }
+      });
+    },
+    // on modifie le client
+    editCustomer(data) {
+      // console.log(data)
+      let vm = this
+      data.key = this.shortid.generate()
+      var customer = {
+        _id: data._id,
+        _rev: data._rev,
+        key: data.key,
+        name: data.name.toUpperCase(),
+        firstName: data.firstName,
+        address: data.address,
+        postCode: data.postCode,
+        city: data.city,
+        email: data.email,
+        phone: data.phone
+      };
+      // on envoie le client en BDD
+      vm.$db.put(customer, function callback(err) {
+        if (!err) {
+          console.log('client modifié!');
+          vm.reset()
+          vm.resetValidation()
+          vm.isFormValid = true
+        } else {
+          // console.log(err)
+          vm.errors.push(err.message)
         }
       });
     },
@@ -129,7 +173,7 @@ export default {
   props: [
     'title',
     'fromPage',
-    'customer'
+    'customer',
   ]
 }
 </script>
