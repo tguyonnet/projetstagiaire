@@ -6,12 +6,11 @@
             <div class="sidebar-header">
                 <h3> <router-link :to="{name:'Home'}" class="nav-link dropdown " data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">MADERA</router-link></h3>
             </div>
-
             <ul class="list-unstyled components">
               <li>
                 <router-link :to="{name:'Home'}" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Accueil</router-link>
               </li>   
-              <li> <!--class="active">-->       
+              <li>    
                 <a data-toggle="collapse" role="button" aria-expanded="false" class="dropdown-toggle" v-on:click="dropdown = !dropdown">Devis</a>
                 <ul class="list-unstyled" id="homeSubmenu" v-bind:class="{collapse: dropdown}">
                   <li>
@@ -36,16 +35,14 @@
                 </button>
               </div>
             </nav> 
-            <router-view/> <!-- Affichage des views appelées-->
+            <router-view/> <!-- Affichage des vues appelées dans le menu-->
             <footer class="page-footer font-small">
               <div class="footer-copyright text-center py-3" id=footfoot>© 2020 Copyright: CESI Groupe 3 PFR
               </div>
             </footer>
         </div>  
       </div>
-
     </div>
-
 </template>
 
 

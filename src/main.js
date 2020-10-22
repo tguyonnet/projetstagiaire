@@ -6,8 +6,6 @@ import vuetify from './plugins/vuetify';
 import Donut from 'vue-css-donut-chart';
 import 'vue-css-donut-chart/dist/vcdonut.css';
 
-Vue.use(Donut);
-
 Vue.config.productionTip = false
 
 //PUCHDB
@@ -23,7 +21,10 @@ const shortid = require('shortid');
 shortid.characters('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$@');
 Vue.prototype.$shortid = shortid
 
-// Initialise a sync with the remote server
+//
+Vue.use(Donut);
+
+//Synchronisation entre la bdd locale et le serveur
 function sync() {
   var opts = {live: true,
     filter: function(doc) {
