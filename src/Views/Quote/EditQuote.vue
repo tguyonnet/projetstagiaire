@@ -7,7 +7,7 @@
     </ol>
   </nav>
     <h1>Gestion des devis</h1>
-    <FormDevis title='Modifier un devis'/>
+     <FormQuote title='Modifier un devis' fromPage='edit' />
   </div>
   
 </template>
@@ -35,7 +35,7 @@ export default {
   },
   methods:{
     findOneCustomer(vm) {
-       axios.get(vm.$api + "/_design/function/_view/vue_client_sans_erreur",{
+       axios.get(vm.$api + "/_design/function/_view/vue_devis_sans_erreur",{
         headers: {
           'Authorization': `Basic ${vm.$token}` 
         }

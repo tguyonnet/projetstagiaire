@@ -1,46 +1,26 @@
 <template>
     <div class="container">
+    <h1>{{ title }}</h1>
         <v-app id="inspirer">
             <v-form v-model="valid">
                 <v-container>
                     <v-row>
-                        <v-col cols="12" md="5">
+                        <v-col md="4">
                             <v-text-field v-model="dataForm.number" label="Numéro du Devis" required></v-text-field>
                         </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col cols="12" md="5">
-                            <v-date-picker v-model="picker" label="Date de réalisation du Devis" required></v-date-picker>
-                        </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col cols="12" md="5">
+                        <v-col md="4">
                             <v-text-field v-model="dataForm.commercial_devis" label="Nom du commercial" required></v-text-field>
                         </v-col>
+                        <v-col md="4">
+                            <v-text-field v-model="dataForm.price" label ="Prix Unitaire HT"></v-text-field>
+                        </v-col>
                     </v-row>
                     <v-row>
-                        <v-col cols="12" md="5">
+                        <v-col md="4">
                             <v-text-field v-model="dataForm.name" label="Nom du client" required></v-text-field>
                         </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col cols="12" md="5">
-                            <v-text-field v-model="dataForm.firstname" label ="Prénom du client" required></v-text-field>
-                        </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col cols="12" md="5">
-                            <v-select
-                                v-model="select" :hint="`${select.state}, ${select.abbr}`"
-                                :items="items" item-text="gamme" item-value="abbr"
-                                label="Gamme de produits" persistent-hint return-object
-                                single-line>
-                            </v-select>
-                        </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col cols="12" md="5">
-                            <v-select v-model="selection" :hint="`${select.state}, ${select.abbr}`"
+                        <v-col md="4">
+                            <v-select v-model="selection" :hint="`${selection.statut}, ${select.abbr}`"
                                 :items="item" item-text="statut" item-value="abr"
                                 label="Statut du devis" persistent-hint return-object
                                 single-line>
@@ -48,10 +28,22 @@
                         </v-col>
                     </v-row>
                     <v-row>
-                        <v-col cols="12" md="5">
-                            <v-text-field v-model="dataForm.price" label ="Prix Unitaire HT"></v-text-field>
+                        <v-col md="4">
+                            <v-text-field v-model="dataForm.firstname" label ="Prénom du client" required></v-text-field>
+                        </v-col>
+                        <v-col md="4">
+                            <v-select
+                                v-model="select" :hint="`${select.gamme}, ${select.abbr}`"
+                                :items="items" item-text="gamme" item-value="abbr"
+                                label="Gamme de produits" persistent-hint return-object
+                                single-line>
+                            </v-select>
+                        </v-col>
+                        <v-col md="4">
+                            <v-date-picker v-model="picker" :show-current="false" label="Date de réalisation du Devis" required></v-date-picker>
                         </v-col>
                     </v-row>
+
                     <v-btn v-if="fromPage == 'add'" :disabled="!valid" color="success" class="mr-4" @click="validate">Valider</v-btn>
                     <v-btn v-if="fromPage == 'edit'" :disabled="!valid" color="warning" class="mr-4" @click="modifiate">Modifier</v-btn>
                     <v-btn color="gray" class="mr-4" @click="reset">Réinitialiser</v-btn>
@@ -81,7 +73,8 @@ export default {
              { statut: 'Signé', abr: 'SG'},
         ],
             shortid : this.$shortid,
-            picker : new Date().toISOString().substr(0.10),
+            picker : new Date().toISOString().substr(0, 10),
+           // picker : '1998-09-10',
             // les données du formulaire
             valid:true,
             isFormValid:false,
@@ -138,5 +131,10 @@ export default {
             });           
         }
     },
+      props: [
+    'title',
+    'fromPage',
+    'customer'
+  ]
 }
 </script>
