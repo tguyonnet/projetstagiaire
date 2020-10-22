@@ -19,7 +19,7 @@
               <th class="text-left"></th>
             </tr>
           </thead>
-          <tbody v-if="devis.length >0">
+         <!-- <tbody v-if="devis.length >0">
             <tr v-for="devis in devis" :key="devis.number">
               <td>{{ devis.doc.number }}</td>
               <td>{{ devis.doc.dateCrea }}</td>
@@ -31,7 +31,7 @@
                 <button type="button" >Modifier</button>
               </td>
             </tr>
-          </tbody>
+          </tbody> -->
         </template>
       </v-simple-table>
       </v-app>  
