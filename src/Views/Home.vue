@@ -1,82 +1,66 @@
 <template>
   <div class="container">
-    <h1>PAGE D'ACCUEIL</h1>
-    <h2>REPARTITIONS DOCUMENTS</h2>
-    <vc-donut :sections="sections">{{nbDocuments}} documents</vc-donut>
-    <p>{{labelClient}} </p>
-    <p>{{labelDevis}} </p>
-    <p>{{labelAutre}}</p>
+    <div class="row">
+      <div class="col-md-4">
+      </div>
+      <div class="col-m-4">
+        <h2>Répartition des documents</h2>
+        <vc-donut 
+          :sections="sections"
+          :total="100"
+          has-legend legend-placement="bottom"
+        >
+          <h1 style="margin: 0;">{{ nbDocuments }}</h1> documents
+        </vc-donut>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-//const axios = require('axios');
-
   export default {
     name: 'Home',
     data() {
-      
       return {
-        labelAutre:"Gris = autres",
-        labelClient:"Vert = Client",
-        labelDevis:"Bleu = Devis",
-        nbDocuments:0,
-        documents:[],
-        customers:[],
-        devis:[],
+        nbDocuments: 0,
+        documents: [],
+        customers: [],
+        quotes: [],
         sections: []
       };
     },
     created(){
-      let vm =this
-      console.log(this.$db)
+      let vm = this
+      //on va chercher les documents en bdd locale
       this.$db.allDocs({
         include_docs: true,
         attachments: true
       }).then(function(docs) {
-       // console.log(docs)
-        //console.log(docs.total_rows)
         //sur 100
         vm.nbDocuments = docs.total_rows
-        let pourcentage = 100/docs.total_rows
+        let pourcentage = 100 / docs.total_rows
 
         //nombre client
-        vm.customers = docs.rows.filter(c =>{
-          //console.log(c.id)
-          let id = c.id       
-          if( id.includes('client')){
+        vm.customers = docs.rows.filter(cust =>{
+          if( cust.id.includes('client')){
             return true
-          }else{
-            return false
           }
+          return false
         })
 
-        //nombre devis
-        vm.devis = docs.rows.filter(c =>{
-          //console.log(c.id)
-          let id = c.id       
-          if( id.includes('devis')){
+        //nombre Devis
+        vm.quotes = docs.rows.filter(q =>{
+          if(q.id.includes('devis')){
             return true
-          }else{
-            return false
           }
+          return false
         })
 
+        vm.sections.push ({label: 'Clients', value: vm.customers.length * pourcentage, color: 'green'})
+        vm.sections.push ({label: 'Devis', value: vm.quotes.length * pourcentage, color: 'blue'})
 
-
-      console.log(vm.customers.length)
-        vm.sections.push ({ label: 'Client section' ,value: vm.customers.length * pourcentage, color: 'green' })
-        vm.sections.push ({ label: 'Devis section' ,value: vm.devis.length * pourcentage, color: 'blue' })
-
-        console.log(vm.sections)
-    })
-      
-    },
-    methods:{
-      
-    },
-    components: {
-
+        // console.log(vm.sections)
+      })     
     },
   }
 </script>
