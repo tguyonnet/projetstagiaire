@@ -156,6 +156,15 @@ ul ul a {
 
 }
 
-ol {
+.breadcrumb, .breadcrumb-item {
     background-color: white;
+    padding: 0;
+    padding-left: 2;
+    font-weight: bold;    
 }
+
+.breadcrumb-item :hover {
+    color:#7386D5;
+}
+
+
