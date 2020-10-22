@@ -1,19 +1,19 @@
 <template>
   <div class="container my-5">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
-      <li class="breadcrumb-item active" aria-current="page">Client</li>
-    </ol>
-  </nav>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><router-link :to="{name:'home'}"><i class="fa fa-home"></i></router-link></li>
+        <li class="breadcrumb-item active" aria-current="page">Client</li>
+      </ol>
+    </nav>
     <h1>Clients 
       <button>
-          <router-link to="/client/add" class="fa fa-plus" aria-haspopup="true"></router-link>
+          <router-link :to="{name:'AddCustomer'}" class="fa fa-plus" aria-haspopup="true"></router-link>
       </button>
     </h1>
-    <form class="form-inline my-2 my-lg-0">
-      <input v-model="valueSearch" class="form-control mr-sm-2" type="text" placeholder="Search">
-      <button @click="search()" class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+    <form class="form-inline my-2 my-lg-0" style="place-content:center">
+      <input v-model="valueSearch" class="form-control mr-sm-2" type="text" placeholder="Recherche..">
+      <button @click="search()" class="btn btn-outline-success my-2 my-sm-0" type="submit" >Rechercher</button>
     </form>
     <v-app id="inspire">
         <v-simple-table>
@@ -41,7 +41,7 @@
                 <td>{{ customer.value.email }}</td>
                 <td>{{ customer.value.phone }}</td>
                 <td>         
-                  <router-link class="btn btn-primary" style="color: #fff!important" :to="{path:'/client/edit', params:{customer: customer.value._id}}">Modifier</router-link>
+                  <router-link class="btn btn-primary" style="color: #fff!important" :to="{name:'EditCustomer', params:{key: customer.doc.key}}">Modifier</router-link>
                   <button type="button" class="btn btn-secondary">Créer devis</button>
                 </td>
               </tr>

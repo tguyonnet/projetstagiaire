@@ -72,7 +72,7 @@ export default {
       let rules = []
       rules.push(v => !!v || 'Le champ ' + field + ' est obligatoire')
       if (field == 'code postal') {
-        rules.push(v => (v && v.length <= 5))
+        rules.push(v => (v && v.length == 5) || "Le code postal doit contenir 5 chiffres")
       }
       if (field == 'e-mail') {
         rules.push(v => /.+@.+\..+/.test(v) || "L' e-mail n'est pas valide")
