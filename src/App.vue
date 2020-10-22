@@ -10,11 +10,11 @@
 
             <ul class="list-unstyled components">
               <li>
-                <router-link to="/" class="nav-link dropdown " data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Accueil</router-link>
+                <router-link to="/" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Accueil</router-link>
               </li>   
               <li> <!--class="active">-->       
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Devis</a>
-                <ul class="collapse list-unstyled" id="homeSubmenu">
+                <a href="#homeSubmenu" data-toggle="collapse" role="button" aria-expanded="false" class="dropdown-toggle" v-on:click="dropdown = !dropdown">Devis</a>
+                <ul class="list-unstyled" id="homeSubmenu" v-bind:class="{collapse: dropdown}">
                   <li>
                     <router-link to="/devis/add" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Créer</router-link>
                   </li>
@@ -57,7 +57,8 @@ export default {
   name: 'App',
   data() {
     return {
-      isActive: false
+      isActive: false,
+      dropdown: true
     }
   },
   components: {
