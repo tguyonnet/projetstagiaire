@@ -16,35 +16,77 @@
         <template v-slot:default>
           <thead>
             <tr>
-              <th class="text-left"> N° du Devis</th>
-              <th class="text-left"> Date Création du devis</th>
-              <th class="text-left"> Commercial associé</th>
-              <th class="text-left"> Nom du client</th>
-              <th class="text-left"> Actions</th>
-              <th class="text-left"></th>
-              <th class="text-left"></th>
+              <th class="text-left"> N° Devis</th>
+              <th class="text-left"> Nom Devis</th>
+              <th class="text-left"> Date Création</th>
+              <th class="text-left"> Commercial lié</th>
+              <th class="text-left"> Client lié</th>
+              <th class="text-left"> Prix HT</th>
+              <th class="text-left"> Statut</th>     
             </tr>
           </thead>
-         <!-- <tbody v-if="devis.length >0">
-            <tr v-for="devis in devis" :key="devis.number">
-              <td>{{ devis.doc.number }}</td>
-              <td>{{ devis.doc.dateCrea }}</td>
-              <td>{{ devis.doc.commercial }}</td>
-              <td></td>
-              <td></td>
+          <tbody v-if="quotes.length > 0">
+            <tr v-for="onlyDevis in quotes" :key="onlyDevis.number">
+              <td>{{ onlyDevis.value.key}}</td>
+              <td>{{ onlyDevis.value.nameDevis }}</td>
+              <td>{{ onlyDevis.value.dateCreate}}</td>
+              <td>{{ onlyDevis.value.keyCommercial }}</td>
+              <td>{{ onlyDevis.value.keyClient}}</td>
+              <td>{{ onlyDevis.value.puht}}</td>
+              <td>{{ onlyDevis.value.status}}</td>
               <td>
                 <router-link class="btn btn-primary" to="/devis/modifier">Modifier</router-link>
-                <button type="button" >Modifier</button>
               </td>
             </tr>
-          </tbody> -->
+          </tbody> 
         </template>
       </v-simple-table>
       </v-app>  
   </div>
 </template>
 <script>
+const axios = require('axios');
 export default {
-  
+  name: 'ShowQuote',
+  data() {
+    return {
+      quotes: [],
+      quotesFilter: [],
+      valueSearch:''
+    }
+  },
+    created() {
+     this.findAllquotes(this)
+  },
+  methods:{
+    search(){
+      // console.log(this.quotes)
+      this.quotesFilter = this.quotes.filter(cust =>{
+        let nom = cust.value.name
+        if(nom){
+          if( nom.includes(this.valueSearch.toUpperCase())){
+            return true
+          }   
+        }
+        return false
+      })
+    },
+    findAllquotes(vm) {
+      axios.get(vm.$api + "/_design/function/_view/vue_devis_sans_erreur",{
+        headers: {
+          'Authorization': `Basic ${vm.$token}` 
+        }
+      })
+     .then(function (response) {
+       // handle success
+       vm.quotes = response.data.rows
+       vm.quotesFilter = vm.quotes 
+     }).catch(function (error) {
+       // handle error
+       console.log(error);
+     })
+
+    }
+  }
 }
 </script>
