@@ -44,7 +44,7 @@
           </v-row>
           <v-btn v-if="fromPage == 'add'" :disabled="!valid" color="success" class="mr-4" @click="validate">Valider</v-btn>
           <v-btn v-if="fromPage == 'edit'" :disabled="!valid" color="warning" class="mr-4" @click="validate">Modifier</v-btn>
-          <v-btn color="gray" class="mr-4" @click="reset">Réinitialiser</v-btn>
+          <v-btn v-if="fromPage == 'add'" color="gray" class="mr-4" @click="reset">Réinitialiser</v-btn>
         </v-container>
       </v-form>
     </v-app>
@@ -118,7 +118,7 @@ export default {
       // console.log(data)
       let vm = this
       data.key = this.shortid.generate()
-      var customer = {
+      var cust = {
         _id: "client_" + data.name + "_" + data.postCode + "_" + data.key,
         key: data.key,
         name: data.name.toUpperCase(),
@@ -130,7 +130,7 @@ export default {
         phone: data.phone
       };
       // on envoie le client en BDD
-      vm.$db.put(customer, function callback(err) {
+      vm.$db.put(cust, function callback(err) {
         if (!err) {
           // console.log('client ajouté!');
           vm.reset()
@@ -144,7 +144,7 @@ export default {
       // console.log(data)
       let vm = this
       data.key = this.shortid.generate()
-      var customer = {
+      var cust = {
         _id: data._id,
         _rev: data._rev,
         key: data.key,
@@ -157,7 +157,7 @@ export default {
         phone: data.phone
       };
       // on envoie le client en BDD
-      vm.$db.put(customer, function callback(err) {
+      vm.$db.put(cust, function callback(err) {
         if (!err) {
           console.log('client modifié!');
           vm.reset()

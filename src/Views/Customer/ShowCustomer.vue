@@ -3,7 +3,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><router-link :to="{name:'Home'}"><i class="fa fa-home"></i></router-link></li>
-        <li class="breadcrumb-item active" aria-current="page">Client</li>
+        <li class="breadcrumb-item active" aria-current="page">Clients</li>
       </ol>
     </nav>
     <h1>Clients 

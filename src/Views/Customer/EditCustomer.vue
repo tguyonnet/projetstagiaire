@@ -40,7 +40,7 @@ export default {
       vm.$db.get(vm.key)     
       .then(function (response) {
         // handle success
-        console.log(response) 
+        // console.log(response) 
         vm.customer = response
       }).catch(function (error) {
         // handle error
