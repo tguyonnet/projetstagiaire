@@ -29,16 +29,20 @@
                         </v-col>
                     </v-row>
                     <v-row>
-                        <v-col cols="6">
-                            <v-subheader>
-                                Gammes de produits 
-                            </v-subheader>
-                        </v-col>
-                        <v-col>
+                        <v-col cols="12" md="5">
                             <v-select
                                 v-model="select" :hint="`${select.state}, ${select.abbr}`"
-                                :items="items" item-text="state" item-value="abbr"
-                                label="Select" persistent-hint return-object
+                                :items="items" item-text="gamme" item-value="abbr"
+                                label="Gamme de produits" persistent-hint return-object
+                                single-line>
+                            </v-select>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col cols="12" md="5">
+                            <v-select v-model="selection" :hint="`${select.state}, ${select.abbr}`"
+                                :items="item" item-text="statut" item-value="abr"
+                                label="Statut du devis" persistent-hint return-object
                                 single-line>
                             </v-select>
                         </v-col>
@@ -50,7 +54,7 @@
                     </v-row>
                     <v-btn v-if="fromPage == 'add'" :disabled="!valid" color="success" class="mr-4" @click="validate">Valider</v-btn>
                     <v-btn v-if="fromPage == 'edit'" :disabled="!valid" color="warning" class="mr-4" @click="modifiate">Modifier</v-btn>
-                    <v-btn color="blue" class="mr-4" @click="reset">Réinitialiser</v-btn>
+                    <v-btn color="gray" class="mr-4" @click="reset">Réinitialiser</v-btn>
                 </v-container>
             </v-form>
         </v-app>
@@ -59,7 +63,7 @@
 <script>
 export default {
     
-    name:'FormDevis',
+    name:'FormQuote',
     data(){
         return {
         select: { gamme: 'Modulaires', abbr: 'MOD' },
@@ -70,8 +74,15 @@ export default {
           { gamme: 'Bureaux', abbr: 'BUR' },
           { gamme: 'Autres', abbr: 'AUT' },
         ],
+        selection: {statut: 'En cours', abr: 'ec'},
+        item: [
+             { statut: 'En cours', abr: 'EC' },
+             { statut: 'Envoyé', abr: 'EV' },
+             { statut: 'Signé', abr: 'SG'},
+        ],
             shortid : this.$shortid,
-            picker : new Date().toISOString.substr(0.10),
+            picker : new Date().toISOString().substr(0.10),
+            // les données du formulaire
             valid:true,
             isFormValid:false,
             Error:[],
@@ -81,12 +92,13 @@ export default {
                 commercial_devis:'',
                 nom_client:'',
                 prenom_client:'',
-                gamme_devis:'',
+                gamme_produit:'',
 
             },          
         }
     },
     methods: {
+            // règles spécifiques sur certains champs
             fieldRules(field) {
                 let rules = []
                 rules.push(v => !!v || 'Le champ ' + field + ' est obligatoire')
@@ -112,8 +124,8 @@ export default {
                     num_devis : data.num_devis,
                     date_devis : data.date_devis,
                     commercial_devis : data.commercial_devis,
-                    nom_client : data.nom_client,
-                    gamme_devis: data.gamme_devis 
+                    nom_client : data.nom_client.toUpperCase(),
+                    gamme_produit: data.gamme_produit 
                 };
             vu.$db.put(devis, function callback(err) {
                 if(!err){
