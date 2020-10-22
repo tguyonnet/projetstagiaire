@@ -41,7 +41,7 @@
                 <td>{{ customer.value.email }}</td>
                 <td>{{ customer.value.phone }}</td>
                 <td>         
-                  <router-link class="btn btn-primary" style="color: #fff!important" :to="{name:'EditCustomer', params:{key: customer.value._id}}">Modifier</router-link>
+                  <router-link class="btn btn-primary" style="color: #fff!important" :to="{name:'EditCustomer', params:{key: customer.value.key}}">Modifier</router-link>
                   <router-link class="btn btn-secondary" style="color: #fff!important" :to="{name:'AddQuote'}">Créer devis</router-link>
                 </td>
               </tr>
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-  const axios = require('axios');
+const axios = require('axios');
 export default {
   name: 'ShowCustomer',
   //toutes les variables qu'on utilise dans le template
@@ -66,10 +66,10 @@ export default {
   },
   //la méthode created() s'appelle toute seule quand on ouvre la page
   created() {
-    let vm = this
     // permet de recupérer tous les documents "client"
-   // vm.customers = vm.$dm.replicate.to("https://28bca146-7c07-46d2-b259-679296a4cb7c-bluemix.cloudant.com/madera/_design/function/_view/vue_client")
-    /*vm.$db.allDocs({
+    //ancienne version : méthode directe sans passer par axios
+    /*
+    vm.$db.allDocs({
       include_docs: true,
       starkey: 'client_',
       endkey: 'client_\uffff'
@@ -84,51 +84,42 @@ export default {
           if( id.includes('client')){
             return true
           }
-         
         }else{
           return false
         }
-       
         })
-    });*/
-   
-    //console.log("get")  
-    const token = btoa('apikey-69bcda5d6c17493f9ec349fa46f40c94:2565427be305db84eb986983bc4cfc5cee866370')
-       axios.get("https://28bca146-7c07-46d2-b259-679296a4cb7c-bluemix.cloudant.com/madera/_design/function/_view/vue_client_sans_erreur",
-        {
+    });
+    */
+    this.findAllCustomers(this)
+  },
+  methods:{
+    search(){
+      // console.log(this.customers)
+      this.customersFilter = this.customers.filter(cust =>{
+        let nom = cust.value.name
+        if(nom){
+          if( nom.includes(this.valueSearch.toUpperCase())){
+            return true
+          }   
+        }
+        return false
+      })
+    },
+    findAllCustomers(vm) {
+      axios.get(vm.$api + "/_design/function/_view/vue_client_sans_erreur",{
         headers: {
-          'Authorization': `Basic ${token}` 
+          'Authorization': `Basic ${vm.$token}` 
         }
       })
      .then(function (response) {
        // handle success
-       //console.log(response);
-       
        vm.customers = response.data.rows
-      // console.log(  vm.customers);
-       // console.log(  vm.customers[0].value.name);
        vm.customersFilter = vm.customers 
      }).catch(function (error) {
        // handle error
        console.log(error);
      })
-  },
-  methods:{
-    search:function(){
-      console.log(this.customers)
-      this.customersFilter = this.customers.filter(c =>{
-        const nom = c.value.name
-        if(nom){
-          //console.log(c)
-          //console.log(nom)
-          //console.log(this.valueSearch)
-          if( nom.includes(this.valueSearch.toUpperCase())){
-            return true
-          }   
-        }else{
-          return false
-        }
-      })
+
     }
   }
 }

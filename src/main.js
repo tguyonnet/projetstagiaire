@@ -7,10 +7,13 @@ import vuetify from './plugins/vuetify';
 Vue.config.productionTip = false
 
 //PUCHDB
-var db = new PouchDB('madera');
-Vue.prototype.$db = db
-var remoteCouch = 'https://apikey-69bcda5d6c17493f9ec349fa46f40c94:2565427be305db84eb986983bc4cfc5cee866370@28bca146-7c07-46d2-b259-679296a4cb7c-bluemix.cloudant.com/madera';
-
+const db = new PouchDB('madera');
+Vue.prototype.$db = db;
+const token = btoa('apikey-69bcda5d6c17493f9ec349fa46f40c94:2565427be305db84eb986983bc4cfc5cee866370');
+Vue.prototype.$token = token;
+const api = 'https://apikey-69bcda5d6c17493f9ec349fa46f40c94:2565427be305db84eb986983bc4cfc5cee866370@28bca146-7c07-46d2-b259-679296a4cb7c-bluemix.cloudant.com/madera';
+Vue.prototype.$api = api;
+ 
 //SHORTID
 const shortid = require('shortid');
 shortid.characters('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$@');
@@ -23,19 +26,13 @@ function sync() {
       return doc._id.indexOf('_design') !== 0;
     }
   };
-  db.replicate.to(remoteCouch, opts, syncError);
-  db.replicate.from(remoteCouch, opts, syncError);
+  db.replicate.to(api, opts);
+  db.replicate.from(api, opts);
 }
 
-// There was some form or error syncing
-function syncError() {
-}
-
-if (remoteCouch) {
+if (api) {
   sync();
 }
-
-
 
 new Vue({
   router,
