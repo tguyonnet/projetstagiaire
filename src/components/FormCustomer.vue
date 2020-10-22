@@ -1,8 +1,13 @@
 <template>
   <div class="container">
     <h1>{{ title }}</h1>
+    <div>
+      <v-alert v-if="isFormValid" type="success">
+        Le client a été ajouté !
+      </v-alert>
+    </div>
     <v-app id="inspire">
-      <v-form v-model="valid">
+      <v-form v-model="valid" ref="formCustomer">
         <v-container>
           <v-row>
             <v-col md="6">
@@ -33,6 +38,7 @@
           </v-row>
           <v-btn v-if="fromPage == 'add'" :disabled="!valid" color="success" class="mr-4" @click="validate">Valider</v-btn>
           <v-btn v-if="fromPage == 'edit'" :disabled="!valid" color="warning" class="mr-4" @click="modifiate">Modifier</v-btn>
+          <v-btn color="gray" class="mr-4" @click="reset">Réinitialiser</v-btn>
         </v-container>
       </v-form>
     </v-app>
@@ -47,6 +53,7 @@ export default {
       shortid: this.$shortid,
       // les donées du form
       valid: true,
+      isFormValid: false,
       dataForm: {
         key: '',
         name: '',
@@ -75,8 +82,16 @@ export default {
     // quand on valide le formulaire
     validate () {
       if (this.valid) {
+        this.$refs.formCustomer.validate()
         this.addCustomer(this.dataForm);
       }
+    },
+    reset () {
+      this.$refs.formCustomer.reset()
+      this.isFormValid = false
+    },
+    resetValidation () {
+      this.$refs.formCustomer.resetValidation()
     },
     // on ajoute le client
     addCustomer(data) {
@@ -97,14 +112,13 @@ export default {
       // on envoie le client en BDD
       vm.$db.put(customer, function callback(err) {
         if (!err) {
-          console.log('Customer added!');
-          console.log(vm.dataForm)
-          console.log(vm.valid)
-          vm.dataForm = []
-          vm.valid = !vm.valid
+          // console.log('Customer added!');
+          vm.reset()
+          vm.resetValidation()
+          vm.isFormValid = true
         }
       });
-    }
+    },
   },
   props: [
     'title',
