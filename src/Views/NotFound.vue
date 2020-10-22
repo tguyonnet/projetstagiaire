@@ -1,12 +1,12 @@
 <template>
   <div class="container">
-    <h1>PAGE D'ACCUEIL</h1>
+    <img src="../assets/404.png" alt="404">
   </div>
 </template>
 
 <script>
   export default {
-    name: 'Home',
+    name: 'NotFound',
 
     components: {
     },
