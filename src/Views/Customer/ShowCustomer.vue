@@ -32,7 +32,6 @@
             </thead>
             <tbody v-if="customers.length > 0">
               <tr v-for="customer in customersFilter" :key="customer.name">
-                
                 <td>{{ customer.value.name }}</td>
                 <td>{{ customer.value.firstName }}</td>
                 <td>{{ customer.value.address }}</td>
@@ -41,7 +40,7 @@
                 <td>{{ customer.value.email }}</td>
                 <td>{{ customer.value.phone }}</td>
                 <td>         
-                  <router-link class="btn btn-primary" style="color: #fff!important" :to="{name:'EditCustomer', params:{key: customer.value.key}}">Modifier</router-link>
+                  <router-link class="btn btn-primary" style="color: #fff!important" :to="{name:'EditCustomer', params:{key: customer.value._id}}">Modifier</router-link>
                   <router-link class="btn btn-secondary" style="color: #fff!important" :to="{name:'AddQuote'}">Créer devis</router-link>
                 </td>
               </tr>

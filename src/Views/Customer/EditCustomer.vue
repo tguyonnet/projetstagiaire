@@ -7,19 +7,22 @@
         <li class="breadcrumb-item active">Modifier</li>
       </ol>
     </nav>
-    <!-- <FormCustomer title='Modifier un client' fromPage='edit' /> -->
+    <!-- {{ customer }} -->
+    <div v-if="customer">
+      <FormCustomer title='Modifier un client' fromPage='edit' :customer="customer"/>
+    </div>
   </div>
 </template>
 
 <script>
-const axios = require('axios');
-// import FormCustomer from '../../components/FormCustomer'
+import FormCustomer from '../../components/FormCustomer'
 export default {
   name: 'EditCustomer',
   data() {
     return {
       key: this.$route.params.key,
       customersFilter:[],
+      customer: '',
     }
   },
   created() {
@@ -30,29 +33,19 @@ export default {
     this.findOneCustomer(this)
   },
   components: {
-    // FormCustomer
+    FormCustomer
   },
   methods: {
     findOneCustomer(vm) {
-       axios.get(vm.$api + "/_design/function/_view/vue_client_sans_erreur",{
-        headers: {
-          'Authorization': `Basic ${vm.$token}` 
-        }
+      vm.$db.get(vm.key)     
+      .then(function (response) {
+        // handle success
+        console.log(response) 
+        vm.customer = response
+      }).catch(function (error) {
+        // handle error
+        console.log(error);
       })
-     .then(function (response) {
-      vm.customersFilter = response.data.rows.filter(c =>{
-      const id = c.id       
-        if( id.includes(vm.key)){
-          console.log(c)
-          return true
-        }else{
-          return false
-        }
-      })
-     }).catch(function (error) {
-       // handle error
-       console.log(error);
-     })
     }
   },
 }
