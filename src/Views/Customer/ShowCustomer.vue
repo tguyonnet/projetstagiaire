@@ -69,10 +69,26 @@ export default {
     vm.$db.allDocs({
       include_docs: true,
       starkey: 'client_',
-      endkey: 'client_\uFFFF'
+      endkey: 'client_\uffff'
     }).then(function(docs) {
        //console.log(docs.rows)
       vm.customers = docs.rows
+      vm.customers  =  vm.customers .filter(c =>{
+        const id = c.doc._id
+        if(id){
+          //console.log(c)
+          //console.log(id)
+          if( id.includes('client')){
+            return true
+          }
+         
+        }else{
+          return false
+        }
+       
+        })
+      
+      console.log(vm.customers )
       vm.customersFilter = vm.customers 
     });
   },
@@ -83,8 +99,8 @@ export default {
         const nom = c.doc.name
         if(nom){
           //console.log(c)
-          console.log(nom)
-          console.log(this.valueSearch)
+          //console.log(nom)
+          //console.log(this.valueSearch)
          
           if( nom.includes(this.valueSearch.toUpperCase())){
             return true
