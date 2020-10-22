@@ -77,11 +77,6 @@ a:focus {
     border-bottom: 1px solid #47748b;
 }
 
-#sidebar ul p {
-    color: #fff;
-    padding: 10px;
-}
-
 #sidebar ul li a {
     padding: 10px;
     font-size: 1.1em;
@@ -107,7 +102,7 @@ a[data-toggle="collapse"] {
     display: block;
     position: absolute;
     top: 50%;
-    right: 20px;
+    right: 50px;
     transform: translateY(-50%);
 }
 
@@ -166,5 +161,3 @@ ul ul a {
 .breadcrumb-item :hover {
     color:#7386D5;
 }
-
-
