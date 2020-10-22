@@ -33,8 +33,5 @@ export default {
   methods: {
 
   },
-  props: [
-    'customer',
-  ],
 }
 </script>

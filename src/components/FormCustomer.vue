@@ -128,7 +128,7 @@ export default {
   props: [
     'title',
     'fromPage',
-    'customerID'
+    'customer'
   ]
 }
 </script>
