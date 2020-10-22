@@ -2,7 +2,7 @@
   <div class="about">
     <h1>Consultation des devis
       <button>
-        <router-link class="fa fa-plus" aria-hidden="true" to="/devis"/>
+        <router-link class="fa fa-plus" aria-hidden="true" to="/devis/add"/>
       </button>
     </h1>
     <v-app id="inspire">
@@ -21,9 +21,9 @@
           </thead>
          <!-- <tbody v-if="devis.length >0">
             <tr v-for="devis in devis" :key="devis.number">
-              <td>{{devis.doc.number}}</td>
-              <td>{{devis.doc.dateCrea}}</td>
-              <td>{{devis.doc.commercial}}</td>
+              <td>{{ devis.doc.number }}</td>
+              <td>{{ devis.doc.dateCrea }}</td>
+              <td>{{ devis.doc.commercial }}</td>
               <td></td>
               <td></td>
               <td>
