@@ -14,7 +14,7 @@
 <script>
 import FormQuote from '../../components/FormQuote.vue'
 export default {
-    number: 'AddDevis',
+    number: 'AddQuote',
     components:{
         FormQuote
     },
