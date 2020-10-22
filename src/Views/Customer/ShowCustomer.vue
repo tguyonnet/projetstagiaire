@@ -92,7 +92,7 @@ export default {
         })
     });*/
    
-    console.log("get")  
+    //console.log("get")  
     const token = btoa('apikey-69bcda5d6c17493f9ec349fa46f40c94:2565427be305db84eb986983bc4cfc5cee866370')
        axios.get("https://28bca146-7c07-46d2-b259-679296a4cb7c-bluemix.cloudant.com/madera/_design/function/_view/vue_client",
         {
@@ -102,11 +102,11 @@ export default {
       })
      .then(function (response) {
        // handle success
-       console.log(response);
+       //console.log(response);
        
        vm.customers = response.data.rows
-       console.log(  vm.customers);
-        console.log(  vm.customers[0].value.name);
+      // console.log(  vm.customers);
+       // console.log(  vm.customers[0].value.name);
        vm.customersFilter = vm.customers 
      }).catch(function (error) {
        // handle error
