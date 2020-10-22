@@ -1,5 +1,11 @@
 <template>
   <div class="about">
+    <nav class="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
+        <li class="breadcrumb-itm-active" aria-current="page">Devis</li>
+      </ol>
+    </nav>
     <h1>Consultation des devis
       <button>
         <router-link class="fa fa-plus" aria-hidden="true" to="/devis/add"/>
@@ -14,7 +20,7 @@
               <th class="text-left"> Date Création du devis</th>
               <th class="text-left"> Commercial associé</th>
               <th class="text-left"> Nom du client</th>
-              <th class="text-left"> </th>
+              <th class="text-left"> Actions</th>
               <th class="text-left"></th>
               <th class="text-left"></th>
             </tr>

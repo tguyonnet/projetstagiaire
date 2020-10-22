@@ -7,5 +7,25 @@
     </ol>
   </nav>
     <h1>Gestion des devis</h1>
+    <FormDevis title='Modifier un devis' fromPage='edit'/>
   </div>
+  
 </template>
+<script>
+import FormDevis from '../../components/FormDevis'
+export default {
+  data(){
+
+  },
+  created(){
+
+  },
+  components:{
+    FormDevis
+  },
+  methods:{
+
+  },
+
+}
+</script>
