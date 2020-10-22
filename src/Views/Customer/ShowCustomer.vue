@@ -42,7 +42,7 @@
                 <td>{{ customer.value.phone }}</td>
                 <td>         
                   <router-link class="btn btn-primary" style="color: #fff!important" :to="{name:'EditCustomer', params:{key: customer.value._id}}">Modifier</router-link>
-                  <button type="button" class="btn btn-secondary">Créer devis</button>
+                  <router-link class="btn btn-secondary" style="color: #fff!important" :to="{name:'AddQuote'}">Créer devis</router-link>
                 </td>
               </tr>
             </tbody>
