@@ -66,6 +66,11 @@ export default {
       },
     }
   },
+  created() {
+    if (this.customerID != null) {
+      //
+    }
+  },
   methods: {
     // les règles de tous les champs, fait en fonction pour que ce soit générique
     fieldRules(field) {
@@ -101,7 +106,7 @@ export default {
       var customer = {
         _id: "client_" + data.name + "_" + data.postCode + "_" + data.key,
         key: data.key,
-        name: data.name,
+        name: data.name.toUpperCase(),
         firstName: data.firstName,
         address: data.address,
         postCode: data.postCode,
@@ -123,6 +128,7 @@ export default {
   props: [
     'title',
     'fromPage',
+    'customerID'
   ]
 }
 </script>

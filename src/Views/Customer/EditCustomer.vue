@@ -2,21 +2,17 @@
   <div class="container my-5">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><router-link :to="{name:'home'}"><i class="fa fa-home"></i></router-link></li>
+        <li class="breadcrumb-item"><router-link :to="{name:'Home'}"><i class="fa fa-home"></i></router-link></li>
         <li class="breadcrumb-item"><router-link :to="{name:'ShowCustomer'}">Clients</router-link></li>
         <li class="breadcrumb-item active">Modifier</li>
       </ol>
     </nav>
-    <div>
-      <h1>on modifie pas le devis nouuus</h1>
-    </div>
-    <!-- <FormCustomer title='Modifier un client' fromPage='edit'/> -->
+    <FormCustomer title='Modifier un client' fromPage='edit' />
   </div>
 </template>
 
-
 <script>
-// import FormCustomer from '../../components/FormCustomer'
+import FormCustomer from '../../components/FormCustomer'
 
 export default {
   name: 'EditCustomer',
@@ -27,13 +23,12 @@ export default {
   },
   created() {
     if (this.key == null) {
-        console.log("yousk")
         this.$router.push({ name: 'NotFound'})
     }
     console.log(this.key)
   },
   components: {
-    // FormCustomer
+    FormCustomer
   },
   methods: {
 
