@@ -12,20 +12,63 @@
 </template>
 
 <script>
+const axios = require('axios');
 import FormCustomer from '../../components/FormCustomer'
-
 export default {
   name: 'EditCustomer',
   data() {
     return {
-      key: this.$route.params.key
+      key: this.$route.params.key,
+      customersFilter:[],
     }
   },
   created() {
+    let vm = this
     if (this.key == null) {
         this.$router.push({ name: 'NotFound'})
     }
-    console.log(this.key)
+    console.log("Key = "+this.key)
+     
+   const token = btoa('apikey-69bcda5d6c17493f9ec349fa46f40c94:2565427be305db84eb986983bc4cfc5cee866370')
+       axios.get("https://28bca146-7c07-46d2-b259-679296a4cb7c-bluemix.cloudant.com/madera/_design/function/_view/vue_client_sans_erreur",
+        {
+        headers: {
+          'Authorization': `Basic ${token}` 
+        }
+      })
+     .then(function (response) {
+
+      console.log("Reponse : "+ response)
+      console.log(response.data.rows)
+     
+      console.log("before filtre")
+      vm.customersFilter = response.data.rows.filter(c =>{
+      const id = c.id
+       
+          if( id.includes(vm.key)){
+            console.log(c)
+            return true
+          }else{
+            return false
+          }
+        })
+
+     }).catch(function (error) {
+       // handle error
+       console.log(error);
+     })
+
+
+
+
+
+
+
+
+
+
+    
+
   },
   components: {
     FormCustomer
