@@ -18,7 +18,11 @@ Vue.prototype.$shortid = shortid
 
 // Initialise a sync with the remote server
 function sync() {
-  var opts = {live: true};
+  var opts = {live: true,
+    filter: function(doc) {
+      return doc._id.indexOf('_design') !== 0;
+    }
+  };
   db.replicate.to(remoteCouch, opts, syncError);
   db.replicate.from(remoteCouch, opts, syncError);
 }
