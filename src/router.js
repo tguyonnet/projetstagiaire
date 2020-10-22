@@ -1,12 +1,16 @@
 import Vue from 'vue'   
 import Router from 'vue-router'
+//pages accueil + 404
 import Home from './Views/Home.vue'
 import NotFound from './Views/NotFound.vue'
-import ShowCustomer from './Views/Customer/ShowCustomer.vue'
+//pages client
 import AddCustomer from './Views/Customer/AddCustomer.vue'
 import EditCustomer from './Views/Customer/EditCustomer.vue'
-import ShowQuote from './Views/Quote/ShowQuote.vue'
+import ShowCustomer from './Views/Customer/ShowCustomer.vue'
+//pages devis
+import AddQuote from './Views/Quote/AddQuote.vue'
 import EditQuote from './Views/Quote/EditQuote.vue'
+import ShowQuote from './Views/Quote/ShowQuote.vue'
 
 Vue.use(Router)
 export default new Router({
@@ -49,7 +53,7 @@ export default new Router({
     {
       path: '/devis/ajouter',
       name: 'AddQuote',
-      component: EditQuote
+      component: AddQuote
     }
   ]
 })

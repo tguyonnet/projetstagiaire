@@ -4,26 +4,26 @@
         <!-- Sidebar  -->
         <nav id="sidebar" v-bind:class="{ active: isActive }">
             <div class="sidebar-header">
-                <h3> <router-link to="/" class="nav-link dropdown " data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">MADERA</router-link></h3>
+                <h3> <router-link :to="{name:'Home'}" class="nav-link dropdown " data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">MADERA</router-link></h3>
             </div>
 
             <ul class="list-unstyled components">
               <li>
-                <router-link to="/" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Accueil</router-link>
+                <router-link :to="{name:'Home'}" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Accueil</router-link>
               </li>   
               <li> <!--class="active">-->       
                 <a data-toggle="collapse" role="button" aria-expanded="false" class="dropdown-toggle" v-on:click="dropdown = !dropdown">Devis</a>
                 <ul class="list-unstyled" id="homeSubmenu" v-bind:class="{collapse: dropdown}">
                   <li>
-                    <router-link to="/devis/ajouter" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Créer</router-link>
+                    <router-link :to="{name:'AddQuote'}" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Créer</router-link>
                   </li>
                   <li>
-                    <router-link to="/devis" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Consulter</router-link>
+                    <router-link :to="{name:'ShowQuote'}" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Consulter</router-link>
                   </li>
                 </ul>
               </li>
               <li>
-                <router-link to="/clients" class="nav-link dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clients</router-link>
+                <router-link :to="{name:'ShowCustomer'}" class="nav-link dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clients</router-link>
               </li>          
             </ul>              
         </nav>

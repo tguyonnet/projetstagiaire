@@ -1,14 +1,14 @@
 <template>
-  <div class="about">
-    <nav class="breadcrumb">
+  <div class="container my-5">
+    <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
-        <li class="breadcrumb-itm-active" aria-current="page">Devis</li>
+        <li class="breadcrumb-item"><router-link :to="{name:'Home'}"><i class="fa fa-home"></i></router-link></li>
+        <li class="breadcrumb-item active" aria-current="page">Devis</li>
       </ol>
     </nav>
-    <h1>Consultation des devis
+    <h1>Devis 
       <button>
-        <router-link class="fa fa-plus" aria-hidden="true" to="/devis/add"/>
+          <router-link :to="{name:'AddQuote'}" class="fa fa-plus" aria-haspopup="true"></router-link>
       </button>
     </h1>
     <v-app id="inspire">

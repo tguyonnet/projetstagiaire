@@ -1,18 +1,18 @@
 <template>
-  <div class="about">
-      <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
-      <li class="breadcrumb-item active" aria-current="page">Devis</li>
-    </ol>
-  </nav>
-    <h1>Gestion des devis</h1>
-    <FormDevis title='Modifier un devis' fromPage='edit'/>
-  </div>
-  
+  <div class="container my-5">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><router-link :to="{name:'Home'}"><i class="fa fa-home"></i></router-link></li>
+        <li class="breadcrumb-item"><router-link :to="{name:'ShowQuote'}">Devis</router-link></li>
+        <li class="breadcrumb-item active" aria-current="page">Modifier</li>
+      </ol>
+    </nav>
+    <FormQuote title='Modifier un devis' fromPage='edit'/>
+  </div>  
 </template>
+
 <script>
-import FormDevis from '../../components/FormDevis'
+import FormQuote from '../../components/FormQuote.vue'
 export default {
   data(){
 
@@ -21,7 +21,7 @@ export default {
 
   },
   components:{
-    FormDevis
+    FormQuote
   },
   methods:{
 
