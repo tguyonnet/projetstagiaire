@@ -4,7 +4,7 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><router-link :to="{name:'Home'}"><i class="fa fa-home"></i></router-link></li>
         <li class="breadcrumb-item"><router-link :to="{name:'ShowQuote'}">Devis</router-link></li>
-        <li class="breadcrumb-item active">Ajouter</li>
+        <li class="breadcrumb-item active">Créer</li>
       </ol>
     </nav>
     <FormQuote title='Ajouter un devis' fromPage='add' :customerID="customerID"/>
