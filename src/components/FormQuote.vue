@@ -2,7 +2,7 @@
     <div class="container">
     <h1>{{ title }}</h1>
         <v-alert v-if="isFormValid" type="success" style="background:green">
-            <span v-if="this.fromPage == 'add'">Le devis a été ajouté !</span>
+            <span v-if="this.fromPage == 'add'">Le devis a été créé !</span>
             <span v-if="this.fromPage == 'edit'">Le devis a été modifié !</span>
         </v-alert>
         <div v-if="errors.length > 0">
@@ -14,42 +14,42 @@
             <v-form v-model="valid" ref="formQuote">
                 <v-container>
                     <v-row>
-                        <v-col md="4">
-                            <v-text-field v-model="dataForm.number" label="Numéro du Devis" required></v-text-field>
+                        <v-col md="6">
+                            <v-text-field v-model="dataForm.numQuote" :rules="this.fieldRules('numDevis')" label="Numéro du Devis" required></v-text-field>
                         </v-col>
-                        <v-col md="4">
-                            <v-text-field v-model="dataForm.commercial_devis" label="Nom du commercial" required></v-text-field>
-                        </v-col>
-                        <v-col md="4">
-                            <v-text-field v-model="dataForm.price" label ="Prix Unitaire HT"></v-text-field>
+                        <v-col md="6">
+                            <v-text-field v-model="dataForm.keyCommercial" :rules="this.fieldRules('nomCom')" label="Nom du commercial" required></v-text-field>
                         </v-col>
                     </v-row>
                     <v-row>
-                        <v-col md="4">
-                            <v-text-field v-model="dataForm.name" label="Nom du client" required></v-text-field>
+                        <v-col md="6">
+                            <v-text-field v-model="dataForm.nameClient" :rules="this.fieldRules('nomCli')" label="Nom du client" required></v-text-field>
                         </v-col>
-                        <v-col md="4">
-                            <v-select v-model="selection" :hint="`${selection.statut}, ${select.abbr}`"
-                                :items="item" item-text="statut" item-value="abr"
+                        <v-col md="6">
+                            <v-text-field v-model="dataForm.prenomClient" :rules="this.fieldRules('prenomCli')" label ="Prénom du client" required></v-text-field>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col md="3">
+                            <v-date-picker v-model="picker" :show-current="false" :rules="this.fieldRules('date')" label="Date du Devis" required></v-date-picker>
+                        </v-col>
+                        <v-col md="3">
+                            <v-select v-model="selection" 
+                                :items="item" item-text="statut" item-value="abr" :rules="this.fieldRules('statut')"
                                 label="Statut du devis" persistent-hint return-object
                                 single-line>
                             </v-select>
                         </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col md="4">
-                            <v-text-field v-model="dataForm.firstname" label ="Prénom du client" required></v-text-field>
-                        </v-col>
-                        <v-col md="4">
+                        <v-col md="3">
                             <v-select
-                                v-model="select" :hint="`${select.gamme}, ${select.abbr}`"
-                                :items="items" item-text="gamme" item-value="abbr"
+                                v-model="select"
+                                :items="items" item-text="gamme" item-value="abbr" :rules="this.fieldRules('gamme')"
                                 label="Gamme de produits" persistent-hint return-object
                                 single-line>
                             </v-select>
                         </v-col>
-                        <v-col md="4">
-                            <v-date-picker v-model="picker" :show-current="false" label="Date de réalisation du Devis" required></v-date-picker>
+                        <v-col md="3">
+                            <v-text-field v-model="dataForm.price" :rules="this.fieldRules('puht')" label ="Prix Unitaire HT"></v-text-field>
                         </v-col>
                     </v-row>
                     <v-btn v-if="fromPage == 'add'" :disabled="!valid" color="success" class="mr-4" @click="validate">Valider</v-btn>
@@ -92,12 +92,13 @@ export default {
             isFormValid: false,
             errors: [],
             dataForm: {
-                num_devis: '',
-                date_devis: '',
-                commercial_devis:'',
-                nom_client:'',
-                prenom_client:'',
-                gamme_produit:'',
+                numQuote: '',
+                dateCreate: '',
+                keyCommercial:'',
+                nameClient:'',
+                prenomClient:'',
+                keyGamme:'',
+                price:''
             },          
         }
     },
@@ -106,8 +107,8 @@ export default {
         fieldRules(field) {
             let rules = []
             rules.push(v => !!v || 'Le champ ' + field + ' est obligatoire')
-            if (field == 'Date du devis') {
-                rules.push(v => (v && v.length >= 10))
+            if (field == 'puht') {
+                rules.push(v => (v && !isNaN(v)) || "Le format du prix n'est pas valide")
             }               
             return rules
         }, 
@@ -124,21 +125,22 @@ export default {
             let vu = this
             data.key = this.shortid.generate()
             var devis = {
-                _id : "devis_" + data.num_devis+ "_" + data.nom_client+ "_" + data.commercial_devis + "_"+ data.key,
+                _id : "devis_" + data.numQuote+ "_" + data.keyClient+ "_" + data.keyCommercial + "_"+ data.key,
                 key : data.key,
-                num_devis : data.num_devis,
-                date_devis : data.date_devis,
-                commercial_devis : data.commercial_devis,
-                nom_client : data.nom_client.toUpperCase(),
-                gamme_produit: data.gamme_produit 
+                numQuote : data.numQuote,
+                dateCreate : data.dateCreate,
+                keyCommercial : data.keyCommercial,
+                keyClient : data.keyClient,
+                keyGamme: data.keyGamme 
             };
         vu.$db.put(devis, function callback(err) {
             if(!err){
-                console.log("Devis Ajouté")
+               /*/ console.log("Devis Ajouté")
                 console.log(vu.dataForm)
-                console.log(vu.valid)
+                console.log(vu.valid)*/
                 vu.dataForm = []
                 vu.valid = !vu.valid
+                vu.isFormValid = true
             }
         });           
     }
