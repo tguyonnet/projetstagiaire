@@ -14,7 +14,7 @@
                 <a data-toggle="collapse" role="button" aria-expanded="false" class="dropdown-toggle" v-on:click="dropdown = !dropdown">Devis</a>
                 <ul class="list-unstyled" id="homeSubmenu" v-bind:class="{collapse: dropdown}">
                   <li>
-                    <router-link :to="{name:'AddQuote'}" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Créer</router-link>
+                    <router-link :to="{name:'AddQuote', params:{id: null}}" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Créer</router-link>
                   </li>
                   <li>
                     <router-link :to="{name:'ShowQuote'}" class="nav-link dropdown" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Consulter</router-link>

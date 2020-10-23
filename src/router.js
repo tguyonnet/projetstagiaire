@@ -51,7 +51,7 @@ export default new Router({
       component: EditQuote
     },
     {
-      path: '/devis/ajouter',
+      path: '/devis/ajouter/:id',
       name: 'AddQuote',
       component: AddQuote
     }

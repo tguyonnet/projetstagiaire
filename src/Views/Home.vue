@@ -56,9 +56,8 @@
           return false
         })
 
-        vm.sections.push ({label: 'Clients', value: vm.customers.length * pourcentage, color: 'green'})
-        vm.sections.push ({label: 'Devis', value: vm.quotes.length * pourcentage, color: 'blue'})
-
+        vm.sections.push ({label: vm.customers.length +' Clients', value: vm.customers.length * pourcentage, color: 'green'})
+        vm.sections.push ({label:  vm.quotes.length +' Devis', value: vm.quotes.length * pourcentage, color: 'blue'})
         // console.log(vm.sections)
       })     
     },

@@ -42,7 +42,7 @@
                 <td>{{ customer.value.phone }}</td>
                 <td>         
                   <router-link class="btn btn-primary" style="color: #fff!important" :to="{name:'EditCustomer', params:{id: customer.value._id}}">Modifier</router-link>
-                  <router-link class="btn btn-secondary" style="color: #fff!important" :to="{name:'AddQuote'}">Créer devis</router-link>
+                  <router-link class="btn btn-secondary" style="color: #fff!important" :to="{name:'AddQuote', params:{id: customer.value._id}}">Créer devis</router-link>
                 </td>
               </tr>
             </tbody>
@@ -53,73 +53,10 @@
 </template>
 
 <script>
-const axios = require('axios');
+import myMixin from '../../mixins.js'
+
 export default {
   name: 'ShowCustomer',
-  //toutes les variables qu'on utilise dans le template
-  data() {
-    return {  
-      customers: [],
-      customersFilter:[],
-      valueSearch:'',
-    }
-  },
-  //la méthode created() s'appelle toute seule quand on ouvre la page
-  created() {
-    // permet de recupérer tous les documents "client"
-    //ancienne version : méthode directe sans passer par axios
-    /*
-    vm.$db.allDocs({
-      include_docs: true,
-      starkey: 'client_',
-      endkey: 'client_\uffff'
-    }).then(function(docs) {
-       //console.log(docs.rows)
-      vm.customers = docs.rows
-      vm.customers  =  vm.customers .filter(c =>{
-        const id = c.doc._id
-        if(id){
-          //console.log(c)
-          //console.log(id)
-          if( id.includes('client')){
-            return true
-          }
-        }else{
-          return false
-        }
-        })
-    });
-    */
-    this.findAllCustomers(this)
-  },
-  methods:{
-    search(){
-      // console.log(this.customers)
-      this.customersFilter = this.customers.filter(cust =>{
-        let name = cust.value.name
-        if(name){
-          if( name.includes(this.valueSearch.toUpperCase())){
-            return true
-          }   
-        }
-        return false
-      })
-    },
-    findAllCustomers(vm) {
-      axios.get(vm.$api + "/_design/function/_view/vue_client_sans_erreur",{
-        headers: {
-          'Authorization': `Basic ${vm.$token}` 
-        }
-      })
-     .then(function (response) {
-       // handle success
-       vm.customers = response.data.rows
-       vm.customersFilter = vm.customers 
-     }).catch(function (error) {
-       // handle error
-       console.log(error);
-     })
-    }
-  }
+  mixins: [myMixin],
 }
 </script>

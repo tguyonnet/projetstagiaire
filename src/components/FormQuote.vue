@@ -95,11 +95,14 @@ export default {
                 num_devis: '',
                 date_devis: '',
                 commercial_devis:'',
-                nom_client:'',
-                prenom_client:'',
+                nom_client: '',
+                prenom_client: '',
                 gamme_produit:'',
             },          
         }
+    },
+    created() {
+        console.log(this.customerID)
     },
     methods: {
         // règles spécifiques sur certains champs
@@ -124,29 +127,31 @@ export default {
             let vu = this
             data.key = this.shortid.generate()
             var devis = {
-                _id : "devis_" + data.num_devis+ "_" + data.nom_client+ "_" + data.commercial_devis + "_"+ data.key,
+                _id : "devis_" + data.key+ "_" + this.idClient+ "_" + data.commercial_devis, //+ "_"+ data.key,
                 key : data.key,
+                keyClient: this.idClient,
                 num_devis : data.num_devis,
                 date_devis : data.date_devis,
                 commercial_devis : data.commercial_devis,
-                nom_client : data.nom_client.toUpperCase(),
+                nom_client : data.name.toUpperCase(),
                 gamme_produit: data.gamme_produit 
+                
             };
-        vu.$db.put(devis, function callback(err) {
-            if(!err){
-                console.log("Devis Ajouté")
-                console.log(vu.dataForm)
-                console.log(vu.valid)
-                vu.dataForm = []
-                vu.valid = !vu.valid
-            }
-        });           
-    }
+            vu.$db.put(devis, function callback(err) {
+                if(!err){
+                    console.log("Devis Ajouté")
+                    console.log(vu.dataForm)
+                    console.log(vu.valid)
+                    vu.dataForm = []
+                    vu.valid = !vu.valid
+                }
+            });           
+        }
     },
-      props: [
+    props: [
     'title',
     'fromPage',
-    'customer'
+    'customerID'
   ]
 }
 </script>

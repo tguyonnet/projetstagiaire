@@ -17,29 +17,29 @@
         <v-container>
           <v-row>
             <v-col md="6">
-              <v-text-field v-model="dataForm.name" :rules="this.fieldRules('nom')" label="Nom"></v-text-field>
+              <v-text-field v-model="customer.name" :rules="this.fieldRules('nom')" label="Nom"></v-text-field>
             </v-col>
             <v-col md="6">
-              <v-text-field v-model="dataForm.firstName" :rules="this.fieldRules('prénom')" label="Prénom"></v-text-field>
+              <v-text-field v-model="customer.firstName" :rules="this.fieldRules('prénom')" label="Prénom"></v-text-field>
             </v-col>
           </v-row>
           <v-row>
             <v-col md="5">
-              <v-text-field v-model="dataForm.address" :rules="this.fieldRules('adresse')" label="Adresse"></v-text-field>
+              <v-text-field v-model="customer.address" :rules="this.fieldRules('adresse')" label="Adresse"></v-text-field>
             </v-col>
             <v-col md="4">
-              <v-text-field v-model="dataForm.city" :rules="this.fieldRules('ville')" label="Ville"></v-text-field>
+              <v-text-field v-model="customer.city" :rules="this.fieldRules('ville')" label="Ville"></v-text-field>
             </v-col>
             <v-col md="3">
-              <v-text-field v-model="dataForm.postCode" :rules="this.fieldRules('code postal')" label="Code postal"></v-text-field>
+              <v-text-field v-model="customer.postCode" :rules="this.fieldRules('code postal')" label="Code postal"></v-text-field>
             </v-col>
           </v-row>
           <v-row>
             <v-col md="6">
-              <v-text-field v-model="dataForm.email" :rules="this.fieldRules('e-mail')" label="E-mail"></v-text-field>
+              <v-text-field v-model="customer.email" :rules="this.fieldRules('e-mail')" label="E-mail"></v-text-field>
             </v-col>
             <v-col md="6">
-              <v-text-field v-model="dataForm.phone" :rules="this.fieldRules('téléphone')" label="Téléphone"></v-text-field>
+              <v-text-field v-model="customer.phone" :rules="this.fieldRules('téléphone')" label="Téléphone"></v-text-field>
             </v-col>
           </v-row>
           <v-btn v-if="fromPage == 'add'" :disabled="!valid" color="success" class="mr-4" @click="validate">Valider</v-btn>
@@ -52,33 +52,38 @@
 </template>
 
 <script>
+import myMixin from '../mixins.js'
+
 export default {
   name: 'FormCustomer',
+    mixins: [myMixin],
   data() {
     return { 
       shortid: this.$shortid,
       // les donées du form
       valid: true,
       isFormValid: false,
-      dataForm: {
-        key: '',
-        name: '',
-        firstName: '',
-        address: '',
-        city: '',
-        postCode: '',
-        email: '',
-        phone: '',
-      },
+     /* customer: {
+       
+      },*/
       errors: [],
     }
+  },mounted(){
+    if (this.fromPage == 'edit') {
+         // console.log('form validé')
+         console.log("mounted")
+         console.log(this.id)
+         return this.findOneCustomer(this.id);
+        }
   },
-  created() {
+  /*mounted() {
     if (this.customer) {
+      console.log(this.customer)
+
       this.dataForm = this.customer
     }
     // console.log(this.customer)
-  },
+  },*/
   methods: {
     // les règles de tous les champs, fait en fonction pour que ce soit générique
     fieldRules(field) {
@@ -96,13 +101,14 @@ export default {
     // quand on valide le formulaire
     validate () {
       if (this.valid) {
-        this.$refs.formCustomer.validate()
+        this.$refs.formCustomer.validate(this.id)
+      
         if (this.fromPage == 'add') {
-          this.addCustomer(this.dataForm);
+          this.addCustomer(this.customer);
         }
         if (this.fromPage == 'edit') {
           console.log('form validé')
-          this.editCustomer(this.dataForm);
+          this.editCustomer(this.customer);
         }
       }
     },
@@ -173,7 +179,7 @@ export default {
   props: [
     'title',
     'fromPage',
-    'customer',
+    'id',
   ]
 }
 </script>

@@ -8,21 +8,22 @@
       </ol>
     </nav>
     <div v-if="customer">
-      <FormCustomer title='Modifier un client' fromPage='edit' :customer="customer"/>
+      <FormCustomer title='Modifier un client' fromPage='edit'  :id="id"/>
     </div>
   </div>
 </template>
 
 <script>
+//:customer="customer" 
 import FormCustomer from '../../components/FormCustomer'
+import myMixin from '../../mixins.js'
 
 export default {
   name: 'EditCustomer',
+  mixins: [myMixin],
   data() {
     return {
       id: this.$route.params.id,
-      customersFilter:[],
-      customer: '',
     }
   },
   created() {
@@ -31,23 +32,15 @@ export default {
         this.$router.push({ name: 'NotFound'})
     }
     //sinon on va chercher le client qu'on veut modifier
-    this.findOneCustomer(this)
+    /*console.log(this.id)
+    this.findOneCustomer(this.id)
+    console.log(this.customer)*/
+     //return this.findOneCustomer(this.id)
   },
   components: {
     //on utilise le formulaire de commun a l'ajout et la modification de clients
     FormCustomer
   },
-  methods: {
-    findOneCustomer(vm) {
-      vm.$db.get(vm.id)     
-      .then(function (response) {
-       // Succes de la requete
-        vm.customer = response
-      }).catch(function (error) {
-       // Erreur de la requete
-        console.log(error);
-      })
-    }
-  },
+
 }
 </script>
