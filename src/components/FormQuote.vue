@@ -35,7 +35,7 @@
                         </v-col>
                         <v-col md="3">
                             <v-select v-model="selection" 
-                                :items="item" item-text="statut" item-value="abr" :rules="this.fieldRules('statut')"
+                                :items="item" item-text="statut" :rules="this.fieldRules('statut')"
                                 label="Statut du devis" persistent-hint return-object
                                 single-line>
                             </v-select>
@@ -43,7 +43,7 @@
                         <v-col md="3">
                             <v-select
                                 v-model="select"
-                                :items="items" item-text="gamme" item-value="abbr" :rules="this.fieldRules('gamme')"
+                                :items="items" item-text="gamme" :rules="this.fieldRules('gamme')"
                                 label="Gamme de produits" persistent-hint return-object
                                 single-line>
                             </v-select>
@@ -65,24 +65,17 @@ export default {
     name:'FormQuote',
     data(){
         return {
-            select: { 
-                gamme: 'Modulaires', 
-                abbr: 'MOD' 
-            },
             items: [
-            { gamme: 'Maisons', abbr: 'MAI' },
-            { gamme: 'Bois', abbr: 'BOI' },
-            { gamme: 'Mobil-Homes', abbr: 'MH' },
-            { gamme: 'Bureaux', abbr: 'BUR' },
-            { gamme: 'Autres', abbr: 'AUT' },
-            ],
-            selection: {
-                statut: 'En cours', abr: 'ec'
-            },
+            { gamme: 'Maisons'},
+            { gamme: 'Bois'},
+            { gamme: 'Mobil-Homes'},
+            { gamme: 'Bureaux'},
+            { gamme: 'Autres'},
+            ],      
             item: [
-                { statut: 'En cours', abr: 'EC' },
-                { statut: 'Envoyé', abr: 'EV' },
-                { statut: 'Signé', abr: 'SG'},
+                { statut: 'En cours'},
+                { statut: 'Envoyé'},
+                { statut: 'Signé'},
             ],
             shortid : this.$shortid,
             picker : new Date().toISOString().substr(0, 10),

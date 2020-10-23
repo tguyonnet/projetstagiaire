@@ -21,14 +21,14 @@ export default {
   data(){
     return {
       id: this.$route.params.id,
-      quoteFilters:[],
+      quoteFilter:[],
       quote: '',
     }
   },
   created(){
-    //Si il n'y a pas d'id de passé en param, on renvoie vers la page 404
+    //S'il n'y a pas d'id de passé en param, on renvoie vers la page 404
     if (this.key == null) {
-        this.$router.push({ name: 'NotFound'})
+        this.$route.push({ name: 'NotFound'})
     }
     this.findOneQuote(this)
   },
@@ -37,7 +37,7 @@ export default {
     FormQuote
   },
   methods:{
-    findOneCustomer(vm) {
+    findOneQuote(vm) {
       vm.$db.get(vm.id)     
       .then(function (response) {
        // Succes de la requete
